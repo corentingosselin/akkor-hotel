@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "data-access": {
+      "type": "library",
+      "root": "libs/backend/feature-authentification/data-access",
+      "entryFile": "index",
+      "sourceRoot": "libs/backend/feature-authentification/data-access/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/backend/feature-authentification/data-access/tsconfig.lib.json"
+      }
+    }
+  },
+  "compilerOptions": {
+    "webpack": true
+  }
+}

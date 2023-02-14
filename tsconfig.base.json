@@ -14,7 +14,30 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@akkor-hotel/backend/feature-authentification/core": [
+        "libs/backend/feature-authentification/core/src/index.ts"
+      ],
+      "@akkor-hotel/backend/feature-authentification/data-access": [
+        "libs/backend/feature-authentification/data-access/src/index.ts"
+      ],
+      "@akkor-hotel/backend/feature-authentification/feature": [
+        "libs/backend/feature-authentification/feature/src/index.ts"
+      ],
+      "@akkor-hotel/backend/feature-user/core": [
+        "libs/backend/feature-user/core/src/index.ts"
+      ],
+      "@akkor-hotel/backend/feature-user/data-access": [
+        "libs/backend/feature-user/data-access/src/index.ts"
+      ],
+      "@akkor-hotel/backend/feature-user/feature": [
+        "libs/backend/feature-user/feature/src/index.ts"
+      ],
+      "@akkor-hotel/shared/api-interfaces": [
+        "libs/shared/api-interfaces/src/index.ts"
+      ],
+      "@akkor-hotel/shared/utils": ["libs/shared/utils/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
