@@ -1,12 +1,11 @@
 import * as mysql from 'mysql2/promise';
 
 module.exports = async () => {
-  // create a connection to the database
   const connection = await mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    port: 3306,
+    port: 3305,
   });
 
   // drop the schema

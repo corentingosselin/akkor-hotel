@@ -6,7 +6,7 @@ export const TypeORMMySqlTestingModule = (entities: any[]) =>
     useFactory: () => ({
       type: 'mysql',
       host: process.env.MYSQL_HOST || 'localhost',
-      port: 3306,
+      port: 3305,
       username: 'root',
       password: 'root',
       database: 'test',
@@ -21,7 +21,7 @@ export const TypeORMMySqlTestingModule = (entities: any[]) =>
       return new DataSource({
         type: 'mysql',
         host: process.env.MYSQL_HOST || 'localhost',
-        port: 3306,
+        port: 3305,
         username: 'root',
         password: 'root',
         database: 'test',
