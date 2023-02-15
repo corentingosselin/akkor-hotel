@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  database:
+    image: mysql:latest
+    container_name: test-database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_USER: root
+    ports:
+      - 3305:3306

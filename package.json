@@ -2,7 +2,9 @@
   "name": "akkor-hotel",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "test": "docker-compose -f test/docker-compose.yml up -d --force-recreate && nx affected:test"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~15.1.0",
