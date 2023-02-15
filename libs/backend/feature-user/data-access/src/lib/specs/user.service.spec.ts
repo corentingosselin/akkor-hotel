@@ -1,8 +1,9 @@
 import { UserEntity } from '../entities/user.entity';
 import { Test, TestingModule } from '@nestjs/testing';
-import { TypeORMMySqlTestingModule } from '@akkor-hotel/shared/utils';
+import { clearTables, TypeORMMySqlTestingModule } from '@akkor-hotel/shared/utils';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserService } from '../services/user.service';
+import { DataSource } from 'typeorm';
 
 const user: UserEntity = {
   id: 1,
@@ -17,6 +18,7 @@ const user: UserEntity = {
 
 let createdUser: UserEntity;
 let service: UserService;
+let dataSource: DataSource;
 beforeAll(async () => {
   const module: TestingModule = await Test.createTestingModule({
     imports: [
@@ -25,7 +27,8 @@ beforeAll(async () => {
     ],
     providers: [UserService],
   }).compile();
-
+  
+  dataSource = module.get<DataSource>(DataSource);
    service = module.get<UserService>(UserService);
 });
 
@@ -33,6 +36,7 @@ beforeAll(async () => {
 describe('UserService', () => {
     it('should be defined', () => {
       expect(service).toBeDefined();
+      expect(dataSource).toBeDefined();
     });
   
     it('should create user', async () => {
@@ -74,9 +78,12 @@ describe('UserService', () => {
     it('should remove user', async () => {
       await service.remove(createdUser.id);
       const foundUser = await service.findOne(createdUser.id);
-      expect(foundUser).toBeUndefined();
+      expect(foundUser).toBeNull();
     });
   });
   
-
+afterAll(async () => {
+  //clear tables with typeorm
+  clearTables(dataSource);
+});
 
