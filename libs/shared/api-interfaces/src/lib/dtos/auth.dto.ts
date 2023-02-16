@@ -2,12 +2,12 @@ import { IsEmail } from 'class-validator';
 import { IsPasswordSecure, Match } from '@akkor-hotel/shared/utils';
 
 export class LoginUserDto {
-  @IsEmail()
-  email!: string;
+  username!: string;
   password!: string;
 }
 
 export class RegisterUserDto {
+
   @IsEmail()
   email!: string;
   firstName!: string;
@@ -16,4 +16,5 @@ export class RegisterUserDto {
   password!: string;
   @Match('password')
   confirmPassword!: string;
+  pseudo!: string;
 }

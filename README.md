@@ -12,10 +12,16 @@ Run `nx serve backend` for a dev server. Navigate to http://localhost:4200/. The
 
 Run `nx graph` to see a diagram of the dependencies of the projects.
 
-## Remote caching
+## Running tests
 
-Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and make CI faster.
+1. Start the test database first with: `npm run test:database`   
+2. Then run tests: `nx affected:test`
 
-## Further help
+## Running akkor hotel application
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+Execute this command: `npm run start`
+
+## Resolve cached circular dependencies
+
+`nx reset `
+

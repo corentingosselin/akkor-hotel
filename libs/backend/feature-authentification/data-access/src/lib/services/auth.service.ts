@@ -3,38 +3,54 @@ import {
   LoginUserDto,
   RegisterUserDto,
   SessionResponse,
-  UserAccount
+  User,
+  UserAccount,
 } from '@akkor-hotel/shared/api-interfaces';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as argon2 from 'argon2';
+import { verify } from 'argon2';
 
 @Injectable()
 export class AuthService {
   constructor(
-  
     private readonly userService: UserService,
     private readonly jwtService: JwtService
   ) {}
 
   async validateUser(loginDto: LoginUserDto): Promise<UserAccount> {
-    const user = await this.userService.findOneByEmailOrPseudo(loginDto.email);
-    const dtoPassword = await argon2.hash(loginDto.password);
-    if (user && user.password === dtoPassword) {
+    const user = await this.userService.findOneByEmailOrPseudo(
+      loginDto.username
+    );
+    if (user && verify(user.password, loginDto.password)) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
       return result;
     }
     return null;
   }
 
-  login(user: UserAccount): SessionResponse {
+  login(user: User) : SessionResponse {
     return {
-      access_token: this.jwtService.sign({ email: user.email, id: user.id }),
-      user,
+      access_token: this.jwtService.sign({ email: user.email, sub: user.id }),
+      user
     };
   }
 
-  register(registerDto: RegisterUserDto) {
-    throw new Error('Method not implemented.');
+  async register(registerDto: RegisterUserDto) {
+    const isEmailExists =
+      (await this.userService.findOneByEmailOrPseudo(registerDto.email)) !==
+      null;
+    if (isEmailExists) {
+      throw new BadRequestException('Email already exists');
+    }
+    const isUserExists =
+      (await this.userService.findOneByEmailOrPseudo(registerDto.pseudo)) !==
+      null;
+    if (isUserExists) {
+      throw new BadRequestException('Pseudo already exists');
+    }
+
+    const userEntity = await this.userService.create(registerDto);
+    return this.login(userEntity);
   }
 }

@@ -1,3 +1,4 @@
+import { RegisterUserDto } from '@akkor-hotel/shared/api-interfaces';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -10,15 +11,15 @@ export class UserService {
     private usersRepository: Repository<UserEntity>
   ) {}
 
-  async findAll(): Promise<UserEntity[]> {
+  findAll() {
     return this.usersRepository.find();
   }
 
-  async findOne(id: number): Promise<UserEntity> {
+  findOne(id: number) {
     return this.usersRepository.findOneBy({ id });
   }
 
-  async findOneByEmailOrPseudo(emailOrPseudo: string): Promise<UserEntity> {
+  async findOneByEmailOrPseudo(emailOrPseudo: string) {
     const user = await this.usersRepository
       .createQueryBuilder('user')
       .where('user.email = :emailOrPseudo OR user.pseudo = :emailOrPseudo', {
@@ -28,11 +29,16 @@ export class UserService {
     return user;
   }
 
-  async create(user: UserEntity): Promise<UserEntity> {
-    return this.usersRepository.save(user);
+  async isUserExistsByEmailOrPesudo(identifier: string) {
+    return this.findOneByEmailOrPseudo(identifier) !== null;
   }
 
-  async remove(id: number): Promise<void> {
-    await this.usersRepository.delete(id);
+  create(user: RegisterUserDto) {
+    const userCreated = this.usersRepository.create(user);
+    return this.usersRepository.save(userCreated);
+  }
+
+  remove(id: number) {
+    this.usersRepository.delete(id);
   }
 }

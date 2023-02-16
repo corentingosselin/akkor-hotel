@@ -2,7 +2,6 @@
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
 import { forwardRef, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { LoginUserDto } from '@akkor-hotel/shared/api-interfaces';
 import { AuthService } from '@akkor-hotel/backend/feature-authentification/data-access';
 
 @Injectable()
@@ -13,8 +12,8 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     super();
   }
 
-  async validate(loginDto: LoginUserDto) {
-    const user = await this.authService.validateUser(loginDto);
+  async validate(username: string, password: string) {
+    const user = await this.authService.validateUser({ username, password});
     if (!user) {
       throw new UnauthorizedException();
     }

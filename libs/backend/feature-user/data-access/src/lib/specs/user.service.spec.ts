@@ -4,17 +4,19 @@ import { clearTables, TypeORMMySqlTestingModule } from '@akkor-hotel/shared/util
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserService } from '../services/user.service';
 import { DataSource } from 'typeorm';
+import { RegisterUserDto } from '@akkor-hotel/shared/api-interfaces';
+import * as argon2 from 'argon2';
 
-const user: UserEntity = {
-  id: 1,
-  email: 'email@gmail.com',
-  password: 'password',
-  pseudo: 'pseudo',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  updated_at: new Date(),
-  created_at: new Date(),
+const registerDto: RegisterUserDto = {
+  email: 'test@gmail.com',
+  password: 'test',
+  confirmPassword: 'test',
+  pseudo: 'test',
+  firstName: 'testName',
+  lastName: 'testName'
 };
+
+const { confirmPassword, ...expectedUser } = registerDto;
 
 let createdUser: UserEntity;
 let service: UserService;
@@ -40,30 +42,34 @@ describe('UserService', () => {
     });
   
     it('should create user', async () => {
-      createdUser = await service.create(user);
+      createdUser = await service.create(registerDto);
+
       expect(createdUser).toBeDefined();
-      expect(createdUser.id).toEqual(user.id);
-      expect(createdUser.email).toEqual(user.email);
-      // expect(createdUser.password).toEqual(user.password); TODO crypted password
-      expect(createdUser.pseudo).toEqual(user.pseudo);
-      expect(createdUser.firstName).toEqual(user.firstName);
-      expect(createdUser.lastName).toEqual(user.lastName);
+      expect(createdUser.updated_at).toBeDefined();
+      expect(createdUser.created_at).toBeDefined();
+
+      expect(createdUser.email).toEqual(expectedUser.email);
+      expect(createdUser.password).toEqual(argon2.hash(expectedUser.password)); 
+      expect(createdUser.pseudo).toEqual(expectedUser.pseudo);
+      expect(createdUser.firstName).toEqual(expectedUser.firstName);
+      expect(createdUser.lastName).toEqual(expectedUser.lastName);
+    
     });
   
     it('should find user by id', async () => {
-      const foundUser = await service.findOne(user.id);
+      const foundUser = await service.findOne(createdUser.id);
       expect(foundUser).toBeDefined();
       expect(createdUser).toEqual(foundUser);
     });
   
     it('should find user by email', async () => {
-      const foundUser = await service.findOneByEmailOrPseudo(user.email);
+      const foundUser = await service.findOneByEmailOrPseudo(createdUser.email);
       expect(foundUser).toBeDefined();
       expect(createdUser).toEqual(foundUser);
     });
   
     it('should find user by pseudo', async () => {
-      const foundUser = await service.findOneByEmailOrPseudo(user.pseudo);
+      const foundUser = await service.findOneByEmailOrPseudo(createdUser.pseudo);
       expect(foundUser).toBeDefined();
       expect(createdUser).toEqual(foundUser);
     });
@@ -76,10 +82,31 @@ describe('UserService', () => {
     });
   
     it('should remove user', async () => {
-      await service.remove(createdUser.id);
+      service.remove(createdUser.id);
       const foundUser = await service.findOne(createdUser.id);
       expect(foundUser).toBeNull();
     });
+
+    it('should return true if email exists in user dataset', async () => {
+      const userExists = await service.isUserExistsByEmailOrPesudo(createdUser.email);
+      expect(userExists).toBeTruthy();
+    });
+
+
+    it('should return true if pseudo exists in user dataset', async () => {
+      const userExists = await service.isUserExistsByEmailOrPesudo(createdUser.pseudo);
+      expect(userExists).toBeTruthy();
+    });
+
+    it('should return false if user does not exist', async () => {
+      const userExists = await service.isUserExistsByEmailOrPesudo('notExistingUser');
+      expect(userExists).toBeFalsy();
+    });
+
+
+
+      
+
   });
   
 afterAll(async () => {

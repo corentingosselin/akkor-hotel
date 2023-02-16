@@ -1,5 +1,5 @@
 export interface User extends UserAccount {
-  pseudo: string;
+  password: string;
 }
 
 export interface UserAccount {
