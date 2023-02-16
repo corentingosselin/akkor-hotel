@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "test": "docker-compose -f test/docker-compose.yml up -d --force-recreate && nx affected:test"
+    "test:database": "docker-compose -f test/docker-compose.yml up -d --force-recreate"
   },
   "private": true,
   "dependencies": {
@@ -19,13 +19,17 @@
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^10.0.2",
+    "@nestjs/passport": "^9.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
     "@nrwl/angular": "^15.6.3",
+    "argon2": "^0.30.3",
     "axios": "^1.0.0",
     "class-validator": "^0.14.0",
     "mysql2": "^3.1.2",
+    "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.5.7",
     "tslib": "^2.3.0",
@@ -53,6 +57,7 @@
     "@types/jest": "28.1.1",
     "@types/node": "18.7.1",
     "@types/passport-jwt": "^3.0.8",
+    "@types/passport-local": "^1.0.35",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "cypress": "^12.2.0",

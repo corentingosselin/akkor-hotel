@@ -7,7 +7,7 @@ import { DataSource } from 'typeorm';
 
 const user: UserEntity = {
   id: 1,
-  email: 'email',
+  email: 'email@gmail.com',
   password: 'password',
   pseudo: 'pseudo',
   firstName: 'firstName',

@@ -1,3 +1,4 @@
+import { BackendFeatureAuthentificationFeatureModule } from '@akkor-hotel/backend/feature-authentification/feature';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -21,6 +22,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       }),
       inject: [ConfigService],
     }),
+    BackendFeatureAuthentificationFeatureModule
     
   ],
 })

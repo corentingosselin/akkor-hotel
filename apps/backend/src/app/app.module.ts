@@ -1,4 +1,5 @@
 import { BackendFeatureAuthentificationCoreModule } from '@akkor-hotel/backend/feature-authentification/core';
+import { BackendFeatureUserCoreModule } from '@akkor-hotel/backend/feature-user/core';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
@@ -9,7 +10,8 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
       envFilePath: './apps/backend/environments/.local.env',
     }),
-    BackendFeatureAuthentificationCoreModule
+    BackendFeatureAuthentificationCoreModule,
+    BackendFeatureUserCoreModule
   ],
   controllers: [],
   providers: [],

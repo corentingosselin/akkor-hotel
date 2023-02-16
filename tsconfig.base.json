@@ -24,6 +24,9 @@
       "@akkor-hotel/backend/feature-authentification/feature": [
         "libs/backend/feature-authentification/feature/src/index.ts"
       ],
+      "@akkor-hotel/backend/feature-authentification/utils": [
+        "libs/backend/feature-authentification/utils/src/index.ts"
+      ],
       "@akkor-hotel/backend/feature-user/core": [
         "libs/backend/feature-user/core/src/index.ts"
       ],
