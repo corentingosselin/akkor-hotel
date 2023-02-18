@@ -1,11 +1,15 @@
-import * as mysql from 'mysql2/promise';
-
+//import * as mysql from 'mysql2/promise';
 module.exports = async () => {
-  const connection = await mysql.createConnection({
+
+};
+
+
+/**
+ *   const connection = await mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    port: 3305,
+    port: 3306,
   });
 
   // drop the schema
@@ -19,4 +23,4 @@ module.exports = async () => {
     console.log(`Schema test dropped successfully.`);
     connection.end();
   }
-};
+ */

@@ -29,8 +29,8 @@ export class UserService {
     return user;
   }
 
-  async isUserExistsByEmailOrPesudo(identifier: string) {
-    return this.findOneByEmailOrPseudo(identifier) !== null;
+  async isUserExistsByEmailOrPseudo(identifier: string) {
+    return await this.findOneByEmailOrPseudo(identifier) !== null;
   }
 
   create(user: RegisterUserDto) {
@@ -39,6 +39,6 @@ export class UserService {
   }
 
   remove(id: number) {
-    this.usersRepository.delete(id);
+    return this.usersRepository.delete(id);
   }
 }

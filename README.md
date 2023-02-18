@@ -14,7 +14,7 @@ Run `nx graph` to see a diagram of the dependencies of the projects.
 
 ## Running tests
 
-1. Start the test database first with: `npm run test:database`   
+1. Start the test containers first with: `pnpm run docker:test`   
 2. Then run tests: `nx affected:test`
 
 ## Running akkor hotel application
@@ -24,4 +24,6 @@ Execute this command: `npm run start`
 ## Resolve cached circular dependencies
 
 `nx reset `
+This command will force lint all the project to remove errors/warnings complaining about circular dependencies for example   
+`nx run-many --target=lint --all --parallel --force` 
 
