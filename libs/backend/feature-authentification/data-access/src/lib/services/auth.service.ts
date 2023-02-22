@@ -37,10 +37,11 @@ export class AuthService {
   }
 
   async register(registerDto: RegisterUserDto) {
-    if (this.userService.isUserExistsByEmailOrPseudo(registerDto.email)) {
+    if (await this.userService.isUserExistsByEmailOrPseudo(registerDto.email)) {
       throw new BadRequestException('Email already exists');
     }
-    if (this.userService.isUserExistsByEmailOrPseudo(registerDto.pseudo)) {
+    if (await this.userService.isUserExistsByEmailOrPseudo(registerDto.pseudo)) {
+      console.log('pseudo exists');
       throw new BadRequestException('Pseudo already exists');
     }
 

@@ -1,5 +1,5 @@
 import { UserEntity } from '../entities/user.entity';
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import {
   clearTables,
   TypeORMMySqlTestingModule,
@@ -25,7 +25,7 @@ let createdUser: UserEntity;
 let service: UserService;
 let dataSource: DataSource;
 beforeAll(async () => {
-  const module: TestingModule = await Test.createTestingModule({
+  const module =  await Test.createTestingModule({
     imports: [
       TypeORMMySqlTestingModule([UserEntity]),
       TypeOrmModule.forFeature([UserEntity]),

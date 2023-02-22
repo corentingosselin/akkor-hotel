@@ -29,9 +29,10 @@ export class UserService {
     return user;
   }
 
-  async isUserExistsByEmailOrPseudo(identifier: string) {
-    return await this.findOneByEmailOrPseudo(identifier) !== null;
-  }
+   async isUserExistsByEmailOrPseudo(identifier: string)  {
+    const user = await this.findOneByEmailOrPseudo(identifier);
+    return !!user;
+    }
 
   create(user: RegisterUserDto) {
     const userCreated = this.usersRepository.create(user);

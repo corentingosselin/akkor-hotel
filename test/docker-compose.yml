@@ -1,34 +1,34 @@
 version: '3.9'
 services:
-  database:
+  test-database:
     image: mysql:latest
-    container_name: database
+    container_name: test-database
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: test
+      MYSQL_DATABASE: akkor_hotel
       MYSQL_ROOT_USER: root
     ports:
       - 3306:3306
-  frontend:
+  test-frontend:
     build:
       context: ../
       dockerfile: apps/frontend/Dockerfile
-    container_name: frontend
+    container_name: test-frontend
     restart: always
     ports:
       - 8080:80
-  backend:
+  test-backend:
     env_file: 
       - .back.test.env
     build:
       context: ../
       dockerfile: apps/backend/Dockerfile
-    container_name: backend
+    container_name: test-backend
     restart: always
     ports:
-      - 3000:3000
+      - 4000:4000
     depends_on:
-      - database
+      - test-database
 
 name: akkor_hotel_test
