@@ -7,7 +7,6 @@ export class LoginUserDto {
 }
 
 export class RegisterUserDto {
-
   @IsEmail()
   email!: string;
   firstName!: string;

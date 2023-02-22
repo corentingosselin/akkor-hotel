@@ -10,6 +10,8 @@ export const  dataSource = new DataSource({
   database: 'akkor_hotel',
 });
 
+dataSource.initialize();
+
 export const TypeORMMySqlTestingModule = (entities: any[]) =>
   TypeOrmModule.forRootAsync({
     useFactory: () => ({
@@ -40,14 +42,5 @@ export const clearTables = async (dataSource: DataSource) => {
     await repository.query(`TRUNCATE TABLE ${entity.tableName};`);
     await repository.query(`SET FOREIGN_KEY_CHECKS = 1;`);
   }
-};
-
-export const clearTablesFromEntities = async (dataSource: DataSource, entities : any[]) => {
-  const queryRunner = dataSource.createQueryRunner();
-  await queryRunner.connect();
-  for (const entity of entities) {
-    await queryRunner.clearTable(entity.tableName);
-  }
-  queryRunner.release();
 };
 

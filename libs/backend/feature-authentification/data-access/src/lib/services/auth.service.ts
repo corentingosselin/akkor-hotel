@@ -3,7 +3,6 @@ import {
   LoginUserDto,
   RegisterUserDto,
   SessionResponse,
-  User,
   UserAccount,
 } from '@akkor-hotel/shared/api-interfaces';
 import { BadRequestException, Injectable } from '@nestjs/common';
@@ -29,7 +28,7 @@ export class AuthService {
     return null;
   }
 
-  login(user: User) : SessionResponse {
+  login(user: UserAccount) : SessionResponse {
     return {
       access_token: this.jwtService.sign({ email: user.email, sub: user.id }),
       user
@@ -41,11 +40,13 @@ export class AuthService {
       throw new BadRequestException('Email already exists');
     }
     if (await this.userService.isUserExistsByEmailOrPseudo(registerDto.pseudo)) {
-      console.log('pseudo exists');
       throw new BadRequestException('Pseudo already exists');
     }
 
     const userEntity = await this.userService.create(registerDto);
-    return this.login(userEntity);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...user } = userEntity;
+    const userAccount: UserAccount = user;
+    return this.login(userAccount);
   }
 }
