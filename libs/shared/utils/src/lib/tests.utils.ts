@@ -42,4 +42,12 @@ export const clearTables = async (dataSource: DataSource) => {
   }
 };
 
+export const clearTablesFromEntities = async (dataSource: DataSource, entities : any[]) => {
+  const queryRunner = dataSource.createQueryRunner();
+  await queryRunner.connect();
+  for (const entity of entities) {
+    await queryRunner.clearTable(entity.tableName);
+  }
+  queryRunner.release();
+};
 
