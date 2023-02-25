@@ -39,6 +39,9 @@
       "@akkor-hotel/shared/api-interfaces": [
         "libs/shared/api-interfaces/src/index.ts"
       ],
+      "@akkor-hotel/shared/backend/utils": [
+        "libs/shared/backend/utils/src/index.ts"
+      ],
       "@akkor-hotel/shared/utils": ["libs/shared/utils/src/index.ts"]
     }
   },

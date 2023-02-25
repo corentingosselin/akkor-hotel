@@ -1,18 +1,17 @@
-import { BackendFeatureUserDataAccessModule } from '@akkor-hotel/backend/feature-user/data-access';
-import { forwardRef, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './services/auth.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JwtStrategy, LocalStrategy} from '@akkor-hotel/backend/feature-authentification/utils';
+import { Module } from '@nestjs/common';
+import { BackendFeatureAuthentificationUtilsModule } from '@akkor-hotel/backend/feature-authentification/utils';
+import { BackendFeatureUserDataAccessModule } from '@akkor-hotel/backend/feature-user/data-access';
 
 @Module({
   controllers: [],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService],
   exports: [AuthService],
   imports: [
     PassportModule,
-
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
@@ -22,9 +21,8 @@ import { JwtStrategy, LocalStrategy} from '@akkor-hotel/backend/feature-authenti
       },
       inject: [ConfigService],
     }),
-
-    forwardRef(() => BackendFeatureUserDataAccessModule),
-
+    BackendFeatureAuthentificationUtilsModule,
+    BackendFeatureUserDataAccessModule
   ],
 })
 export class BackendFeatureAuthentificationDataAccessModule {}

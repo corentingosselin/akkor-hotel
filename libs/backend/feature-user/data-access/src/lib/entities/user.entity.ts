@@ -7,7 +7,7 @@ import {
   BeforeInsert,
   BeforeUpdate,
 } from 'typeorm';
-import { User } from '@akkor-hotel/shared/api-interfaces';
+import { User, UserRole } from '@akkor-hotel/shared/api-interfaces';
 import * as argon2 from 'argon2';
 
 @Entity()
@@ -29,6 +29,13 @@ export class UserEntity implements User {
 
   @Column()
   password: string;
+
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.USER,
+  })
+  role: UserRole;
 
   @CreateDateColumn()
   created_at: Date;

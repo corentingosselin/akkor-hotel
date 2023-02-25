@@ -9,26 +9,36 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import 'mysql2';
 import { ConfigService } from '@nestjs/config';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+
+  const config = new DocumentBuilder()
+    .setTitle('Akkor Hotel API')
+    .setDescription('All API endpoints for Akkor Hotel Backend Application')
+    .setVersion('1.0')
+    .addTag('cats')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
+
   app.useGlobalPipes(
     new ValidationPipe({
       enableDebugMessages: true,
-      disableErrorMessages: true,
+      disableErrorMessages: configService.get('NODE_ENV') === 'production',
       stopAtFirstError: true,
       forbidUnknownValues: true,
       skipMissingProperties: true,
-
+      whitelist: true,
+      forbidNonWhitelisted: true,
     }),
   );
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
   // inject configservice
-  const configService = app.get(ConfigService);
-  console.log(configService.get('BACKEND_PORT'));
-  console.log(process.env.BACKEND_PORT);
-
   const port = configService.get('BACKEND_PORT') || 3333;
   await app.listen(port);
   Logger.log(

@@ -8,6 +8,14 @@ export interface UserAccount {
   firstName: string;
   lastName: string;
   pseudo: string;
+  role: UserRole;
   created_at: Date;
   updated_at: Date;
+}
+
+
+export enum UserRole {
+  ADMIN = 'admin',
+  EMPLOYEE = 'employee',
+  USER = 'user'
 }

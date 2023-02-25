@@ -42,7 +42,6 @@ describe('CustomValidator', () => {
     it('should validate password and confirmPassword match', async () => {
       const matchingPassword = new MatchingPassword();
       const errors = await validate(matchingPassword);
-      console.log(errors);
       expect(errors.length).toEqual(0);
     });
 

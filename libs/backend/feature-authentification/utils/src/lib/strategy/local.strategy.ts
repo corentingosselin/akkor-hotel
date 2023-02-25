@@ -1,19 +1,33 @@
 
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
-import { forwardRef, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { AuthService } from '@akkor-hotel/backend/feature-authentification/data-access';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { LoginUserDto, UserAccount } from '@akkor-hotel/shared/api-interfaces';
+import { UserService } from '@akkor-hotel/backend/feature-user/data-access';
+import { verify } from 'argon2';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(
-    @Inject(forwardRef(() => AuthService))
-    private readonly authService: AuthService) {
+    private readonly userService: UserService) {
     super();
   }
 
+  async validateUser(loginDto: LoginUserDto): Promise<UserAccount> {
+    const user = await this.userService.findOneByEmailOrPseudo(
+      loginDto.username
+    );
+    if (user && verify(user.password, loginDto.password)) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password, ...result } = user;
+      return result;
+    }
+    return null;
+  }
+
+
   async validate(username: string, password: string) {
-    const user = await this.authService.validateUser({ username, password});
+    const user = await this.validateUser({ username, password});
     if (!user) {
       throw new UnauthorizedException();
     }
