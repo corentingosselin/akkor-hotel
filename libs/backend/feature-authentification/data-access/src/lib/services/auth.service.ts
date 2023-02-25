@@ -1,5 +1,6 @@
 import { UserService } from '@akkor-hotel/backend/feature-user/data-access';
 import {
+  JwtUserSession,
   RegisterUserDto,
   SessionResponse,
   UserAccount,
@@ -14,11 +15,18 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
 
+  login(user: UserAccount): SessionResponse {
+    const payload = {
+      username: user.email,
+      email: user.email,
+      sub: user.id,
+      userId: user.id,
+      role: user.role,
+    } as JwtUserSession;
 
-  login(user: UserAccount) : SessionResponse {
     return {
-      access_token: this.jwtService.sign({ email: user.email, user_id: user.id, role: user.role }),
-      user
+      access_token: this.jwtService.sign(payload),
+      user,
     };
   }
 
@@ -26,7 +34,9 @@ export class AuthService {
     if (await this.userService.isUserExistsByEmailOrPseudo(registerDto.email)) {
       throw new BadRequestException('Email already exists');
     }
-    if (await this.userService.isUserExistsByEmailOrPseudo(registerDto.pseudo)) {
+    if (
+      await this.userService.isUserExistsByEmailOrPseudo(registerDto.pseudo)
+    ) {
       throw new BadRequestException('Pseudo already exists');
     }
 

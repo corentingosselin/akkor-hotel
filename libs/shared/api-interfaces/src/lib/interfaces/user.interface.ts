@@ -14,6 +14,13 @@ export interface UserAccount {
 }
 
 
+export interface JwtUserSession {
+  userId: number;
+  email: string;
+  role: UserRole;
+}
+
+
 export enum UserRole {
   ADMIN = 'admin',
   EMPLOYEE = 'employee',

@@ -1,4 +1,6 @@
-import { UserAccount } from '@akkor-hotel/shared/api-interfaces';
+import {
+  JwtUserSession
+} from '@akkor-hotel/shared/api-interfaces';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
@@ -14,7 +16,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: UserAccount) {
-    return { userId: payload.id, username: payload.email };
+  async validate(payload: JwtUserSession) {
+    return {
+      userId: payload.userId,
+      email: payload.email,
+      role: payload.role,
+    };
   }
 }

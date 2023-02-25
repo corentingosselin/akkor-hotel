@@ -27,6 +27,24 @@
       "@akkor-hotel/backend/feature-authentification/utils": [
         "libs/backend/feature-authentification/utils/src/index.ts"
       ],
+      "@akkor-hotel/backend/feature-booking/core": [
+        "libs/backend/feature-booking/core/src/index.ts"
+      ],
+      "@akkor-hotel/backend/feature-booking/data-access": [
+        "libs/backend/feature-booking/data-access/src/index.ts"
+      ],
+      "@akkor-hotel/backend/feature-booking/feature": [
+        "libs/backend/feature-booking/feature/src/index.ts"
+      ],
+      "@akkor-hotel/backend/feature-hotel/core": [
+        "libs/backend/feature-hotel/core/src/index.ts"
+      ],
+      "@akkor-hotel/backend/feature-hotel/data-access": [
+        "libs/backend/feature-hotel/data-access/src/index.ts"
+      ],
+      "@akkor-hotel/backend/feature-hotel/feature": [
+        "libs/backend/feature-hotel/feature/src/index.ts"
+      ],
       "@akkor-hotel/backend/feature-user/core": [
         "libs/backend/feature-user/core/src/index.ts"
       ],

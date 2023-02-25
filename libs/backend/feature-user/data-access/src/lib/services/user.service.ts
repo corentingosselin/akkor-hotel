@@ -24,6 +24,8 @@ export class UserService {
   }
 
   async getUserById(id: number) : Promise<UserAccount> {
+
+
     const user = await this.findOne(id);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...userAccount } = user;
@@ -46,7 +48,7 @@ export class UserService {
       return new BadRequestException('Pseudo already exists');
     }
     const result = await this.usersRepository.update(userUpdate.id, userUpdate);
-    return !!result;
+    return result.affected > 0;
   }
 
   async findOneByEmailOrPseudo(emailOrPseudo: string) {
@@ -71,6 +73,6 @@ export class UserService {
 
   async delete(id: number) {
     const result = await this.usersRepository.delete(id);
-    return !!result;
+    return result.affected > 0;
   }
 }
