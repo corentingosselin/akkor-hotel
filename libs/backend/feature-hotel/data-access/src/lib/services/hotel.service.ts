@@ -15,13 +15,24 @@ export class HotelService {
   ) {}
 
   //List all hotel and allow you to sort by date, name, location with a limit (default limit is 10 but can be changed with a parameter)
-  async findAll(sortBy: string, limit: number) {
-    return this.hotelRepository.find({
-      order: {
-        [sortBy]: 'ASC',
-      },
-      take: limit,
-    });
+  async findAll(sortBy = 'id', limit = 10) {
+    const queryBuilder = this.hotelRepository.createQueryBuilder('hotel');
+    switch (sortBy) {
+      case 'name':
+        queryBuilder.orderBy('hotel.name', 'ASC');
+        break;
+      case 'city':
+        queryBuilder.orderBy('hotel.city', 'ASC');
+        break;
+      case 'date':
+        queryBuilder.orderBy('hotel.created_at', 'ASC');
+        break;
+      default:
+        queryBuilder.orderBy('hotel.id', 'ASC');
+    }
+
+    const hotels = await queryBuilder.limit(limit).getMany();
+    return hotels;
   }
 
   async create(hotel: CreateHotelDto) {

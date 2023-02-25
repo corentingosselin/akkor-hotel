@@ -3,7 +3,7 @@ import {
   UpdateUserDto,
   UserAccount,
 } from '@akkor-hotel/shared/api-interfaces';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
@@ -24,9 +24,10 @@ export class UserService {
   }
 
   async getUserById(id: number) : Promise<UserAccount> {
-
-
     const user = await this.findOne(id);
+    if(!user) {
+      throw new NotFoundException('User not found');
+    }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...userAccount } = user;
     return userAccount;
@@ -72,7 +73,7 @@ export class UserService {
   }
 
   async delete(id: number) {
-    const result = await this.usersRepository.delete(id);
+    const result = await this.usersRepository.delete(id)
     return result.affected > 0;
   }
 }

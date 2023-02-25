@@ -6,6 +6,7 @@ import {
   Roles,
 } from '@akkor-hotel/shared/backend/utils';
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -30,9 +31,12 @@ export class UserController {
 
   @UseGuards(RoleGuard)
   @Roles(UserRole.USER)
-  @Delete()
-  async delete(@Req() req) {
-    return this.userService.delete(req.user.id);
+  @Delete(':id')
+  async delete(@Req() req, @Param('id') id: number) {
+    if (req.user.userId != id) {
+      return new BadRequestException('You can only delete your own account');
+    }
+    return this.userService.delete(req.user.userId);
   }
 
   @UseGuards(RoleGuard)

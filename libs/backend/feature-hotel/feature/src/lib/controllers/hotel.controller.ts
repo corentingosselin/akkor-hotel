@@ -20,7 +20,7 @@ export class HotelController {
 
   //List all hotel and allow you to sort by date, name, location with a limit (default limit is 10 but can be changed with a parameter)
   @Get()
-  async findAll(@Query('sort') sort: string, @Query('limit') limit = 10) {
+  async findAll(@Query('sort') sort = 'id', @Query('limit') limit = 10) {
     return this.hotelService.findAll(sort, limit);
   }
 

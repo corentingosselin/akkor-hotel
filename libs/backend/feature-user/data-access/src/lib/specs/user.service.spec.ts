@@ -100,7 +100,7 @@ describe('UserService', () => {
 
 
   it('should remove user', () => {
-    const removeResult = service.remove(createdUser.id);
+    const removeResult = service.delete(createdUser.id);
     removeResult.then(async () => {
       const foundUser = await service.findOne(createdUser.id);
       expect(foundUser).toBeNull();

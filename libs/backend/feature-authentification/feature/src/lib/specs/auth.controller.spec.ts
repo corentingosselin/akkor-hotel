@@ -3,7 +3,7 @@ import { RegisterUserDto, SessionResponse } from '@akkor-hotel/shared/api-interf
 import {
   clearTables,
   TypeORMMySqlTestingModule,
-} from '@akkor-hotel/shared/utils';
+} from '@akkor-hotel/shared/test';
 import { UserEntity } from '@akkor-hotel/backend/feature-user/data-access';
 import { Test } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
