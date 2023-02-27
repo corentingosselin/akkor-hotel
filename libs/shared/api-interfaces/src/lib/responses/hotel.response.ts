@@ -5,4 +5,6 @@ export interface CreatedBookingResponse {
     hotel: Hotel;
     startDate: Date;
     endDate: Date;
+    created_at: Date;
+    updated_at: Date;
 }

@@ -17,6 +17,10 @@ export class HttpClient {
 
     return response;
   }
+
+   getConfiguration() {
+    return this.config;
+   }
 }
 
 export enum HttpMethod {

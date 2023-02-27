@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="content">
+    <form [formGroup]="form" (submit)="register()">
+      <div class="flex-column-gap">
+        <h1>Register to your account</h1>
+
+        <tui-notification
+          *ngIf="error$ | async"
+          status="error"
+          [hasIcon]="true"
+        >
+          {{ error$ | async }}
+        </tui-notification>
+
+        <div>
+          <tui-input formControlName="emailControl">
+            Your email
+            <input tuiTextfield type="email" />
+          </tui-input>
+
+          <tui-error
+            formControlName="emailControl"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+
+        <div>
+          <tui-input formControlName="pseudoControl">
+            Your pseudo
+            <input tuiTextfield type="text" />
+          </tui-input>
+
+          <tui-error
+            formControlName="pseudoControl"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+
+        <div>
+          <tui-input formControlName="lastNameControl">
+            Your last name
+            <input tuiTextfield type="text" />
+          </tui-input>
+
+          <tui-error
+            formControlName="lastNameControl"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+
+        <div>
+          <tui-input formControlName="firstNameControl">
+            Your first name
+            <input tuiTextfield type="text" />
+          </tui-input>
+
+          <tui-error
+            formControlName="firstNameControl"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+
+        <div>
+          <tui-input-password formControlName="passwordControl">
+            Password
+            <input tuiTextfield placeholder="Make it secure!" />
+          </tui-input-password>
+          <tui-error
+            formControlName="passwordControl"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+
+        <div>
+          <tui-input-password formControlName="confirmPasswordControl">
+            Confirm password
+            <input tuiTextfield placeholder="Make it secure!" />
+          </tui-input-password>
+          <tui-error
+            formControlName="confirmPasswordControl"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+
+        <a tuiLink href="#">Already have an account ?</a>
+
+        <div>
+          <tui-loader
+            [showLoader]="(loading$ | async)!"
+            [inheritColor]="true"
+            [overlay]="true"
+          >
+            <button tuiButton [style.width.%]="100" size="l" type="submit">
+              Register
+            </button>
+          </tui-loader>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -17,7 +17,7 @@ export class BookingEntity implements Booking {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => UserEntity, { nullable: false })
+  @ManyToOne(() => UserEntity, { nullable: false})
   @JoinColumn()
   user: UserEntity;
 
@@ -36,4 +36,5 @@ export class BookingEntity implements Booking {
 
   @UpdateDateColumn()
   updated_at: Date;
+  
 }

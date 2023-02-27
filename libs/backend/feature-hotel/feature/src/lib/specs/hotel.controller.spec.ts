@@ -6,6 +6,7 @@ import {
   createAdminUser,
   createDummyUser,
   FakeUser,
+  generateRandomString,
   TypeORMMySqlTestingModule,
 } from '@akkor-hotel/shared/test';
 import { HttpMethod } from '@akkor-hotel/shared/utils';
@@ -27,10 +28,10 @@ beforeAll(async () => {
 
   dataSource = module.get<DataSource>(DataSource);
 
-  adminUser = await createAdminUser(dataSource);
-  dummyUser = await createDummyUser(dataSource);
+  adminUser = await createAdminUser(dataSource, 'hotel');
+  dummyUser = await createDummyUser(dataSource, 'hotel');
 
-  await generateRandomHotels();
+  generatedHotels = await generateRandomHotels();
 });
 
 const hotelDto: CreateHotelDto = {
@@ -42,7 +43,7 @@ const hotelDto: CreateHotelDto = {
   picture: 'test',
 };
 
-const generatedHotels: HotelEntity[] = [];
+let generatedHotels: HotelEntity[];
 
 describe('/hotel (GET)', () => {
   it('user should get all hotels with default limit of 10', async () => {
@@ -69,20 +70,28 @@ describe('/hotel (GET)', () => {
     }
   });
 
-  it('user should get all hotels sorted by name', async () => {
+  it('user should get all hotels sorted by city', async () => {
     const response = await dummyUser.client.sendRequest(
       HttpMethod.GET,
       `/hotel?sort=city&limit=5`
     );
     expect(response.status).toBe(200);
     expect((response.data as []).length).toBe(5);
-    const alphabeticallySortedHotels = generatedHotels.sort((a, b) =>
-        a.city.localeCompare(b.city)
-      ),
-      hotels = response.data as HotelEntity[];
-    for (let i = 0; i < hotels.length; i++) {
-      expect(hotels[i].id).toBe(alphabeticallySortedHotels[i].id);
+
+    const hotelsReceived = response.data as HotelEntity[];
+    const hotels = response.data as HotelEntity[];
+    //shuffling hotels
+    for (let i = hotels.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [hotels[i], hotels[j]] = [hotels[j], hotels[i]];
     }
+    //sort hotels by city
+    hotels.sort((a, b) => {
+      return a.city.localeCompare(b.city);
+    });
+
+    //check if hotelsReceived is same as hotels
+    expect(hotels).toEqual(hotelsReceived);
   });
 
   it('user should get all hotels sorted by date', async () => {
@@ -98,15 +107,16 @@ describe('/hotel (GET)', () => {
     const hotels = response.data as HotelEntity[];
     //shuffling hotels
     for (let i = hotels.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [hotels[i], hotels[j]] = [hotels[j], hotels[i]];
+      const j = Math.floor(Math.random() * (i + 1));
+      [hotels[i], hotels[j]] = [hotels[j], hotels[i]];
     }
     //sort hotels by createdAt
     hotels.sort((a, b) => {
-        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+      return (
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      );
     });
     expect(hotels).toEqual(hotelsReceived);
-
   });
 });
 
@@ -132,12 +142,13 @@ afterAll(async () => {
   await clearTables(dataSource);
 });
 
-async function generateRandomHotels() {
+async function generateRandomHotels() : Promise<HotelEntity[]> {
+  const hotels = [];
   for (let i = 0; i < 20; i++) {
     const createHotelDto = {
-      name: Math.random().toString(36).substring(7),
+      name: generateRandomString(10),
       address: `test${i}`,
-      city: Math.random().toString(36).substring(7),
+      city: generateRandomString(10),
       country: `test${i}`,
       description: `test${i}`,
       picture: `test${i}`,
@@ -147,6 +158,9 @@ async function generateRandomHotels() {
       `/hotel`,
       createHotelDto
     );
-    generatedHotels.push(response.data);
+    hotels.push(response.data);
   }
+  return new Promise( (resolve) => {
+    resolve(hotels);
+  });
 }

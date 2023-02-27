@@ -21,33 +21,33 @@ export class HotelController {
   //List all hotel and allow you to sort by date, name, location with a limit (default limit is 10 but can be changed with a parameter)
   @Get()
   async findAll(@Query('sort') sort = 'id', @Query('limit') limit = 10) {
-    return this.hotelService.findAll(sort, limit);
+    return await this.hotelService.findAll(sort, limit);
   }
 
   @Get(':id')
   async get(@Param('id') id: number) {
-    return this.hotelService.getById(id);
+    return await this.hotelService.getById(id);
   }
 
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Roles(UserRole.ADMIN)
   @Post()
   async create(@Body() hotel: CreateHotelDto) {
-    return this.hotelService.create(hotel);
+    return await this.hotelService.create(hotel);
   }
 
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Roles(UserRole.ADMIN)
   @Delete(':id')
   async delete(@Param('id') id: number) {
-    return this.hotelService.delete(id);
+    return await this.hotelService.delete(id);
   }
 
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Roles(UserRole.ADMIN)
   @Put(':id')
   async update(@Param('id') id: number, @Body() hotel: CreateHotelDto) {
-    return this.hotelService.update(id, hotel);
+    return await this.hotelService.update(id, hotel);
   }
 
   

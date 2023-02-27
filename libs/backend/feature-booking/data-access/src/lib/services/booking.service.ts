@@ -4,7 +4,12 @@ import {
   CreatedBookingResponse,
   UpdateBookingDto,
 } from '@akkor-hotel/shared/api-interfaces';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BookingEntity } from '../entities/booking.entity';
@@ -18,15 +23,24 @@ export class BookingService {
   ) {}
 
   async findBookingByEmailOrPseudo(emailOrPseudo: string) {
-    const bookings = await this.bookingRepository
+    if (!emailOrPseudo) {
+      throw new BadRequestException();
+    }
+    //find booking by email or pseudo
+    const booking = await this.bookingRepository
       .createQueryBuilder('booking')
-      .innerJoinAndSelect('booking.user', 'user')
-      .innerJoinAndSelect('booking.hotel', 'hotel')
-      .where('booking.email = :emailOrPseudo OR user.pseudo = :emailOrPseudo', {
-        emailOrPseudo,
-      })
+      .leftJoinAndSelect('booking.user', 'user')
+      .leftJoinAndSelect('booking.hotel', 'hotel')
+      .where('user.email = :emailOrPseudo', { emailOrPseudo })
+      .orWhere('user.pseudo = :emailOrPseudo', { emailOrPseudo })
       .getMany();
-    return bookings;
+
+    //remove users password
+    booking.forEach((booking) => {
+      delete booking.user.password;
+    });
+
+    return booking;
   }
 
   async getAllByUser(userId: number) {
@@ -54,6 +68,8 @@ export class BookingService {
       hotel: hotel,
       startDate: result.startDate,
       endDate: result.endDate,
+      updated_at: result.updated_at,
+      created_at: result.created_at,
     };
   }
 
@@ -63,15 +79,26 @@ export class BookingService {
 
   async createByUser(userId: number, booking: CreateBookingDto) {
     //verify if the user owns the booking
-    if (booking.userId !== userId) {
+    if (booking.userId != userId) {
       return new UnauthorizedException();
     }
 
     //check if the booking does not already exist for same user
     const bookings = await this.getAllByUser(userId);
-    const bookingAlreadyExist = bookings.some(
-      (b) => b.hotel.id === booking.hotelId
-    );
+    const bookingAlreadyExist = bookings.some((b) => {
+      const bDate = new Date(booking.startDate);
+      const d1 = new Date(
+        b.startDate.getFullYear(),
+        b.startDate.getMonth(),
+        b.startDate.getDate()
+      );
+      const d2 = new Date(
+        bDate.getFullYear(),
+        bDate.getMonth(),
+        bDate.getDate()
+      );
+      return b.hotel.id === booking.hotelId && d1.getTime() === d2.getTime();
+    });
     if (bookingAlreadyExist) {
       return new UnauthorizedException(
         'You already have a booking for this hotel'
@@ -104,7 +131,17 @@ export class BookingService {
   }
 
   async getById(id: number) {
-    return this.bookingRepository.findOneBy({ id });
+    //return this.bookingRepository.findOneBy({ id });
+    //get booking with hotel
+    const booking = await this.bookingRepository
+      .createQueryBuilder('booking')
+      .leftJoinAndSelect('booking.hotel', 'hotel')
+      .where('booking.id = :id', { id })
+      .getOne();
+    if (!booking) {
+      throw new NotFoundException(`Booking not found`);
+    }
+    return booking;
   }
 
   async update(id: number, booking: UpdateBookingDto) {

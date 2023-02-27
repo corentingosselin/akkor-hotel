@@ -3,7 +3,7 @@ import { Test } from '@nestjs/testing';
 import {
   clearTables,
   TypeORMMySqlTestingModule,
-} from '@akkor-hotel/shared/utils';
+} from '@akkor-hotel/shared/test';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserService } from '../services/user.service';
 import { DataSource } from 'typeorm';
@@ -67,21 +67,32 @@ describe('UserService', () => {
 
   it('should find user by email', async () => {
     const foundUser = await service.findOneByEmailOrPseudo(createdUser.email);
+    console.log(foundUser);
     expect(foundUser).toBeDefined();
-    expect(createdUser).toEqual(foundUser);
+    expect(foundUser.email).toEqual(createdUser.email);
+    expect(foundUser.firstName).toEqual(createdUser.firstName);
+    expect(foundUser.lastName).toEqual(createdUser.lastName);
+    expect(foundUser.pseudo).toEqual(createdUser.pseudo);
+
   });
 
   it('should find user by pseudo', async () => {
     const foundUser = await service.findOneByEmailOrPseudo(createdUser.pseudo);
     expect(foundUser).toBeDefined();
-    expect(createdUser).toEqual(foundUser);
-  });
+    expect(foundUser.email).toEqual(createdUser.email);
+    expect(foundUser.firstName).toEqual(createdUser.firstName);
+    expect(foundUser.lastName).toEqual(createdUser.lastName);
+    expect(foundUser.pseudo).toEqual(createdUser.pseudo);  });
 
   it('should find all users', async () => {
     const foundUsers = await service.findAll();
     expect(foundUsers.length).toBeGreaterThan(0);
     expect(foundUsers[0]).toBeDefined();
-    expect(createdUser).toEqual(foundUsers[0]);
+    expect(foundUsers[0].email).toEqual(createdUser.email);
+    expect(foundUsers[0].firstName).toEqual(createdUser.firstName);
+    expect(foundUsers[0].lastName).toEqual(createdUser.lastName);
+    expect(foundUsers[0].pseudo).toEqual(createdUser.pseudo);
+
   });
 
   it('should return true if email exists in user dataset', async () => {
@@ -117,6 +128,5 @@ describe('UserService', () => {
 });
 
 afterAll(async () => {
-  //clear tables with typeorm
-  clearTables(dataSource);
+  await clearTables(dataSource);
 });

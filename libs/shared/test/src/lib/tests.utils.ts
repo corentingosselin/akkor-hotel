@@ -59,12 +59,13 @@ export const createUser = async (
     lastName: user.lastName,
     role: user.role,
   });
+
   return {
     id: userEntity.id,
     email: userEntity.email,
     pseudo: userEntity.pseudo,
-    firstName: userEntity.firstname,
-    lastName: userEntity.lastname,
+    firstName: userEntity.firstName,
+    lastName: userEntity.lastName,
     role: userEntity.role,
     created_at: userEntity.created_at,
     updated_at: userEntity.updated_at,
@@ -81,22 +82,21 @@ export const generateUser = async (
   dataSource: DataSource,
   user: { role: UserRole } & RegisterUserDto
 ): Promise<FakeUser> => {
-  const createdUser : UserAccount = await createUser(dataSource, user);
-
-  //send login request
-  const response = await axios.post(`/auth/login`, {
+  const createdUser: UserAccount = await createUser(dataSource, user);
+  const response = axios.post(`/auth/login`, {
     username: createdUser.email,
     password: DEFAULT_PASSWORD,
   });
-  const session = response.data as SessionResponse;
+
+  const result = await response;
+  const session = result.data as SessionResponse;
+
   const axiosConfig = {
     headers: {
       Authorization: `Bearer ${session.access_token}`,
     },
   };
-
   const client = new HttpClient(axiosConfig);
-
   return {
     user: createdUser,
     session,
@@ -104,27 +104,33 @@ export const generateUser = async (
   };
 };
 
-export const createAdminUser = async (dataSource: DataSource) => {
+export const createAdminUser = async (
+  dataSource: DataSource,
+  feature: string
+) => {
   const adminUser = await generateUser(dataSource, {
-    email: 'admin@gmail.com',
-    firstName: 'admin',
-    lastName: 'admin',
+    email: `${feature}-admin@gmail.com`,
+    firstName: `${feature}-admin`,
+    lastName: `${feature}-admin`,
     password: DEFAULT_PASSWORD,
     confirmPassword: DEFAULT_PASSWORD,
-    pseudo: 'admin',
+    pseudo: `${feature}-admin`,
     role: UserRole.ADMIN,
   });
   return adminUser;
 };
 
-export const createDummyUser = async (dataSource: DataSource) => {
+export const createDummyUser = async (
+  dataSource: DataSource,
+  feature: string
+) => {
   const dummyUser = await generateUser(dataSource, {
-    email: 'test@gmail.com',
-    firstName: 'test',
-    lastName: 'test',
+    email: `${feature}-test@gmail.com`,
+    firstName: `${feature}-test`,
+    lastName: `${feature}-test`,
     password: DEFAULT_PASSWORD,
     confirmPassword: DEFAULT_PASSWORD,
-    pseudo: 'test',
+    pseudo: `${feature}-test`,
     role: UserRole.USER,
   });
   return dummyUser;
@@ -139,3 +145,12 @@ export const clearTables = async (dataSource: DataSource) => {
     await repository.query(`SET FOREIGN_KEY_CHECKS = 1;`);
   }
 };
+
+export function generateRandomString(length: number): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}

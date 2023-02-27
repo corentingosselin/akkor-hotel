@@ -6,6 +6,7 @@ specifiers:
   '@angular-eslint/eslint-plugin-template': ~15.0.0
   '@angular-eslint/template-parser': ~15.0.0
   '@angular/animations': ~15.1.0
+  '@angular/cdk': ^15.0.0
   '@angular/cli': ~15.1.0
   '@angular/common': ~15.1.0
   '@angular/compiler': ~15.1.0
@@ -29,12 +30,20 @@ specifiers:
   '@nrwl/angular': ^15.6.3
   '@nrwl/cypress': 15.6.3
   '@nrwl/eslint-plugin-nx': 15.6.3
-  '@nrwl/jest': 15.6.3
+  '@nrwl/jest': 15.7.1
   '@nrwl/linter': 15.6.3
   '@nrwl/nest': 15.6.3
   '@nrwl/node': 15.6.3
   '@nrwl/webpack': 15.6.3
   '@nrwl/workspace': 15.6.3
+  '@taiga-ui/addon-mobile': ^3.19.0
+  '@taiga-ui/cdk': ^3.19.0
+  '@taiga-ui/core': ^3.19.0
+  '@taiga-ui/icons': ^3.19.0
+  '@taiga-ui/kit': ^3.19.0
+  '@taiga-ui/styles': ^3.19.0
+  '@tinkoff/ng-dompurify': 3.0.0
+  '@types/dompurify': 2.2.3
   '@types/jest': 28.1.1
   '@types/node': 18.7.1
   '@types/passport-jwt': ^3.0.8
@@ -46,12 +55,14 @@ specifiers:
   class-transformer: ^0.5.1
   class-validator: ^0.14.0
   cypress: ^12.2.0
+  dompurify: 2.2.9
   eslint: ~8.15.0
   eslint-config-prettier: 8.1.0
   eslint-plugin-cypress: ^2.10.3
   jest: 28.1.1
   jest-environment-jsdom: 28.1.1
   jest-preset-angular: ~12.2.3
+  jwt-decode: ^3.1.2
   mysql2: ^3.1.2
   nx: 15.6.3
   passport: ^0.6.0
@@ -60,6 +71,8 @@ specifiers:
   prettier: ^2.6.2
   reflect-metadata: ^0.1.13
   rxjs: ~7.5.7
+  sass: ^1.58.3
+  sass-loader: ^13.2.0
   supertest: ^6.3.3
   ts-jest: 28.0.5
   ts-node: 10.9.1
@@ -70,6 +83,7 @@ specifiers:
 
 dependencies:
   '@angular/animations': 15.1.5_@angular+core@15.1.5
+  '@angular/cdk': 15.2.0_oznblskr5qbtvt766x35xnlopy
   '@angular/common': 15.1.5_w2a4ar2ssyezibn6c65i4snjzu
   '@angular/compiler': 15.1.5_@angular+core@15.1.5
   '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
@@ -86,16 +100,27 @@ dependencies:
   '@nestjs/swagger': 6.2.1_ldzmua2hsw2tga2e42i6lmmdty
   '@nestjs/typeorm': 9.0.1_mckk3uhdn45uhm27yjfmunxuam
   '@nrwl/angular': 15.7.1_hfz2m537s3uxplmjiopiu67ide
+  '@taiga-ui/addon-mobile': 3.19.0_zhpnun72slw4b4e74ykopmvnzm
+  '@taiga-ui/cdk': 3.19.0_nonsgekq3wybw3gbyt2d7lvbkq
+  '@taiga-ui/core': 3.19.0_knts34a6hkeswrds4whn5kqzse
+  '@taiga-ui/icons': 3.19.0
+  '@taiga-ui/kit': 3.19.0_m5og4ls3dxzzsqbr6sufknv53u
+  '@taiga-ui/styles': 3.19.0
+  '@tinkoff/ng-dompurify': 3.0.0_bi7cssckait2ho7aggq2g5i7bm
   argon2: 0.30.3
   axios: 1.3.3
   class-transformer: 0.5.1
   class-validator: 0.14.0
+  dompurify: 2.2.9
+  jwt-decode: 3.1.2
   mysql2: 3.1.2
   passport: 0.6.0
   passport-jwt: 4.0.1
   passport-local: 1.0.0
   reflect-metadata: 0.1.13
   rxjs: 7.5.7
+  sass: 1.58.3
+  sass-loader: 13.2.0_sass@1.58.3
   tslib: 2.5.0
   typeorm: 0.3.12_svueicy7jt4clq2rsbe7j7o2ii
   zone.js: 0.11.8
@@ -112,12 +137,13 @@ devDependencies:
   '@nestjs/testing': 9.3.9_yqmogfxzeu633isbftgaoi4ho4
   '@nrwl/cypress': 15.6.3_gemgxnsbzodaaivtirucicvzdy
   '@nrwl/eslint-plugin-nx': 15.6.3_7h4xi6u72tmtv4jcsflc7xqxha
-  '@nrwl/jest': 15.6.3_7nbvt2swijzkpi5mktk3iifwgy
+  '@nrwl/jest': 15.7.1_7nbvt2swijzkpi5mktk3iifwgy
   '@nrwl/linter': 15.6.3_2gweb7o7pkltzmj3jx6phpvxki
   '@nrwl/nest': 15.6.3_frbnj6evdrsmea464mprrpvtv4
   '@nrwl/node': 15.6.3_frbnj6evdrsmea464mprrpvtv4
   '@nrwl/webpack': 15.6.3_jcxi3tqeijirpvmwow4kczlavy
   '@nrwl/workspace': 15.6.3_3joxs7tzhkrjjacnd53qs32tau
+  '@types/dompurify': 2.2.3
   '@types/jest': 28.1.1
   '@types/node': 18.7.1
   '@types/passport-jwt': 3.0.8
@@ -431,6 +457,21 @@ packages:
     dependencies:
       '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
       tslib: 2.5.0
+
+  /@angular/cdk/15.2.0_oznblskr5qbtvt766x35xnlopy:
+    resolution: {integrity: sha512-+D0gLmDZVCBMSZ6juImP0eXpL40hw4Ipm8KRQmF3UOU9T5xXMxzYjUI8N3J+ZUZsNzQwy+eW0HImkZ5St6YxvA==}
+    peerDependencies:
+      '@angular/common': ^15.0.0 || ^16.0.0
+      '@angular/core': ^15.0.0 || ^16.0.0
+      rxjs: ^6.5.3 || ^7.4.0
+    dependencies:
+      '@angular/common': 15.1.5_w2a4ar2ssyezibn6c65i4snjzu
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      rxjs: 7.5.7
+      tslib: 2.5.0
+    optionalDependencies:
+      parse5: 7.1.2
+    dev: false
 
   /@angular/cli/15.1.6:
     resolution: {integrity: sha512-GmC9jZK2ipUWj0dlfTI5oEYia4y1fLfO3AtAKU5CylNYrGyB+DRytKY8Bx6Fs4kaNBY8V8YnyLi7E/78gziMdg==}
@@ -2353,7 +2394,7 @@ packages:
     dependencies:
       '@bcoe/v8-coverage': 0.2.3
       '@jest/console': 28.1.3
-      '@jest/test-result': 28.1.1
+      '@jest/test-result': 28.1.3
       '@jest/transform': 28.1.3
       '@jest/types': 28.1.3
       '@jridgewell/trace-mapping': 0.3.17
@@ -2369,7 +2410,7 @@ packages:
       istanbul-lib-source-maps: 4.0.1
       istanbul-reports: 3.1.5
       jest-message-util: 28.1.3
-      jest-util: 28.1.1
+      jest-util: 28.1.3
       jest-worker: 28.1.3
       slash: 3.0.0
       string-length: 4.0.2
@@ -2766,6 +2807,51 @@ packages:
       uuid: 8.3.2
     dev: false
 
+  /@ng-web-apis/common/2.1.0_oznblskr5qbtvt766x35xnlopy:
+    resolution: {integrity: sha512-6DLtrsk59z9YwfR8Pm1DiExXpxvMk/RVry/mfsAKkyRmgCGICgDdyQ+eWMVhrOIyUAtt9V+DRvHUeC6iYaHKNQ==}
+    peerDependencies:
+      '@angular/common': '>=12.0.0'
+      '@angular/core': '>=12.0.0'
+      rxjs: '>=6.4.0'
+    dependencies:
+      '@angular/common': 15.1.5_w2a4ar2ssyezibn6c65i4snjzu
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      rxjs: 7.5.7
+      tslib: 2.5.0
+    dev: false
+
+  /@ng-web-apis/intersection-observer/3.0.0_@angular+core@15.1.5:
+    resolution: {integrity: sha512-Y3ts9WgXG/A6atyMlFOoP8ZNczUNxUGHSV4ii4xCepwcKW2gN/kkimsP4oPtb7UsTWzN1tF1n0bgD2civraZiA==}
+    peerDependencies:
+      '@angular/core': '>=12.0.0'
+      '@ng-web-apis/common': '>=2.0.0'
+    dependencies:
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      tslib: 2.5.0
+    dev: false
+
+  /@ng-web-apis/mutation-observer/2.0.0_kx4fhrjgrfo2ilfjb6p6owkfna:
+    resolution: {integrity: sha512-f51Cu2DloNze1HaTWdUbtYFnt9VXhzpEnHDd9KFdiKOUNfEDx7wrSXIEQqv810hrq7F2jcIAERCdiqV6ItH7Pg==}
+    peerDependencies:
+      '@angular/core': '>=12.0.0'
+      '@ng-web-apis/common': '>=2.0.0'
+    dependencies:
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      '@ng-web-apis/common': 2.1.0_oznblskr5qbtvt766x35xnlopy
+      tslib: 2.5.0
+    dev: false
+
+  /@ng-web-apis/resize-observer/2.0.0_kx4fhrjgrfo2ilfjb6p6owkfna:
+    resolution: {integrity: sha512-umuXJepTYBCI3ZcW9873fozO0qt1PeHLBNM+wXA+7Wphy35+RQcPNmkwfgkKqWceIjlYAvyuPTNWa5TM1OEeqg==}
+    peerDependencies:
+      '@angular/core': '>=12.0.0'
+      '@ng-web-apis/common': '>=2.0.0'
+    dependencies:
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      '@ng-web-apis/common': 2.1.0_oznblskr5qbtvt766x35xnlopy
+      tslib: 2.5.0
+    dev: false
+
   /@ngtools/webpack/15.1.6_2gl3cy67h547er6qppszlgqm4u:
     resolution: {integrity: sha512-ieHO6c3m+LZ93/B4n4QD908tUCkyNPFF9spMjJFZf8SRpLLvzOISMgiAej7UUxcBiB2kOfdVrpHf4Os4D9CsrQ==}
     engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
@@ -3031,7 +3117,6 @@ packages:
       tslib: 2.5.0
     transitivePeerDependencies:
       - typescript
-    dev: false
 
   /@nrwl/devkit/15.7.1_nx@15.7.1+typescript@4.8.4:
     resolution: {integrity: sha512-u+4iBukrvrSQbKktnAcEuFzthq5ZGLpjE+SYUgg5+H6R76U0uelupdJ14qTWzIbSjlWLG53YmRZsJaIJ9EUG/w==}
@@ -3117,7 +3202,6 @@ packages:
       - supports-color
       - ts-node
       - typescript
-    dev: false
 
   /@nrwl/js/15.6.3_2u2gzctz54omcka5teftpq3jfa:
     resolution: {integrity: sha512-OkjpbNAL6732jGPR7Lz/6K6AScqjxMGuZCHmMqmlK0NpSRcOtYJpGsn4XZzPRsWteqXCvY/l3efceiL6eNPmRg==}
@@ -3454,8 +3538,8 @@ packages:
       postcss-import: 14.1.0_postcss@8.4.21
       postcss-loader: 6.2.1_6jdsrmfenkuhhw3gx4zvjlznce
       rxjs: 6.6.7
-      sass: 1.58.2
-      sass-loader: 12.6.0_sass@1.58.2+webpack@5.75.0
+      sass: 1.58.3
+      sass-loader: 12.6.0_sass@1.58.3+webpack@5.75.0
       source-map-loader: 3.0.2_webpack@5.75.0
       style-loader: 3.3.1_webpack@5.75.0
       stylus: 0.55.0
@@ -3525,8 +3609,8 @@ packages:
       postcss-import: 14.1.0_postcss@8.4.21
       postcss-loader: 6.2.1_6jdsrmfenkuhhw3gx4zvjlznce
       rxjs: 6.6.7
-      sass: 1.58.2
-      sass-loader: 12.6.0_sass@1.58.2+webpack@5.75.0
+      sass: 1.58.3
+      sass-loader: 12.6.0_sass@1.58.3+webpack@5.75.0
       source-map-loader: 3.0.2_webpack@5.75.0
       style-loader: 3.3.1_webpack@5.75.0
       stylus: 0.55.0
@@ -3712,6 +3796,171 @@ packages:
     resolution: {integrity: sha512-Uy0+khmZqUrUGm5dmMqVlnvufZRSK0FbYzVgp0UMstm+F5+W2/jnEEQyc9vo1ZR/E5ZI/B1WjjoTqBqwJL6Krw==}
     dev: false
 
+  /@taiga-ui/addon-mobile/3.19.0_zhpnun72slw4b4e74ykopmvnzm:
+    resolution: {integrity: sha512-QTnv/BE6RoObhYf8Zu2cxhP9p4S9luzaaTVQMwWi22vGTYuoUdmjU5JXN4MXSO+EKGDTs/dxgy+D6hYIvQFEnQ==}
+    peerDependencies:
+      '@angular/cdk': '>=12.0.0'
+      '@angular/common': '>=12.0.0'
+      '@angular/core': '>=12.0.0'
+      '@ng-web-apis/common': '>=2.0.0'
+      '@taiga-ui/cdk': '>=3.19.0'
+      '@taiga-ui/core': '>=3.19.0'
+      '@taiga-ui/kit': '>=3.19.0'
+      '@tinkoff/ng-polymorpheus': '>=4.0.0'
+      rxjs: '>=6.0.0'
+    dependencies:
+      '@angular/cdk': 15.2.0_oznblskr5qbtvt766x35xnlopy
+      '@angular/common': 15.1.5_w2a4ar2ssyezibn6c65i4snjzu
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      '@taiga-ui/cdk': 3.19.0_nonsgekq3wybw3gbyt2d7lvbkq
+      '@taiga-ui/core': 3.19.0_knts34a6hkeswrds4whn5kqzse
+      '@taiga-ui/kit': 3.19.0_m5og4ls3dxzzsqbr6sufknv53u
+      rxjs: 7.5.7
+      tslib: 2.5.0
+    dev: false
+
+  /@taiga-ui/cdk/3.19.0_nonsgekq3wybw3gbyt2d7lvbkq:
+    resolution: {integrity: sha512-eF3B8z5JGneA+tqUH8/HVkA/xbbaXnJv/yZOIgIqymcvR9Dn+ps816030vJ+wb+MwCiNJ2VsvGgmL4lFFTPqOg==}
+    peerDependencies:
+      '@angular/animations': '>=12.0.0'
+      '@angular/common': '>=12.0.0'
+      '@angular/core': '>=12.0.0'
+      '@angular/forms': '>=12.0.0'
+      rxjs: '>=6.0.0'
+    dependencies:
+      '@angular/animations': 15.1.5_@angular+core@15.1.5
+      '@angular/common': 15.1.5_w2a4ar2ssyezibn6c65i4snjzu
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      '@angular/forms': 15.1.5_kkteiffnjutwxhimrtvkwyrg3a
+      '@ng-web-apis/common': 2.1.0_oznblskr5qbtvt766x35xnlopy
+      '@ng-web-apis/mutation-observer': 2.0.0_kx4fhrjgrfo2ilfjb6p6owkfna
+      '@ng-web-apis/resize-observer': 2.0.0_kx4fhrjgrfo2ilfjb6p6owkfna
+      '@tinkoff/ng-event-plugins': 3.1.0_oasloymih2qwpklphtnzvarrl4
+      '@tinkoff/ng-polymorpheus': 4.0.10_@angular+core@15.1.5
+      rxjs: 7.5.7
+      tslib: 2.5.0
+    optionalDependencies:
+      ng-morph: 2.1.0
+      parse5: 6.0.1
+    transitivePeerDependencies:
+      - '@angular-devkit/core'
+      - '@angular-devkit/schematics'
+      - '@angular/platform-browser'
+    dev: false
+
+  /@taiga-ui/core/3.19.0_knts34a6hkeswrds4whn5kqzse:
+    resolution: {integrity: sha512-j/LbR5HWxSB3n1P8TQxlPtujIGeQXlrhEjekY2YP3L0ev5Q3AMqq8v5QRR0PbhGzzm6SfhIeOWzNX8ZpIRWG6Q==}
+    peerDependencies:
+      '@angular/animations': '>=12.0.0'
+      '@angular/common': '>=12.0.0'
+      '@angular/core': '>=12.0.0'
+      '@angular/forms': '>=12.0.0'
+      '@angular/platform-browser': '>=12.0.0'
+      '@angular/router': '>=12.0.0'
+      '@ng-web-apis/common': '>=2.0.0'
+      '@ng-web-apis/mutation-observer': '>=2.0.0'
+      '@taiga-ui/cdk': '>=3.19.0'
+      '@tinkoff/ng-event-plugins': '>=3.1.0'
+      '@tinkoff/ng-polymorpheus': '>=4.0.0'
+      rxjs: '>=6.0.0'
+    dependencies:
+      '@angular/animations': 15.1.5_@angular+core@15.1.5
+      '@angular/common': 15.1.5_w2a4ar2ssyezibn6c65i4snjzu
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      '@angular/forms': 15.1.5_kkteiffnjutwxhimrtvkwyrg3a
+      '@angular/platform-browser': 15.1.5_s7kwnqxnlkypgp4vtemlnxkbmi
+      '@angular/router': 15.1.5_kkteiffnjutwxhimrtvkwyrg3a
+      '@taiga-ui/cdk': 3.19.0_nonsgekq3wybw3gbyt2d7lvbkq
+      '@taiga-ui/i18n': 3.19.0_w2a4ar2ssyezibn6c65i4snjzu
+      rxjs: 7.5.7
+      tslib: 2.5.0
+    dev: false
+
+  /@taiga-ui/i18n/3.19.0_w2a4ar2ssyezibn6c65i4snjzu:
+    resolution: {integrity: sha512-iGCTE+0bT8B5tSmxJvV5nmjE+9lYdcVcD/vrv0dMXXQOVZiepqNkG6eaZSq9s+rOkE/JTP9PtvzZeTMOGJnjNA==}
+    peerDependencies:
+      '@angular/core': '>=12.0.0'
+      rxjs: '>=6.0.0'
+    dependencies:
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      rxjs: 7.5.7
+      tslib: 2.5.0
+    dev: false
+
+  /@taiga-ui/icons/3.19.0:
+    resolution: {integrity: sha512-Z4RmvRzZMmaECg0SzF7dIT7MnWz1Ra3SaXSdDiKjsZXvqKD07JKxVzeDta/nZI1UZEpys+ZYNu2OuzWB8Gt0XA==}
+    dependencies:
+      tslib: 2.5.0
+    dev: false
+
+  /@taiga-ui/kit/3.19.0_m5og4ls3dxzzsqbr6sufknv53u:
+    resolution: {integrity: sha512-fo0tpOGasOuXQQIZWl45Fp+w1PgChd/Oh+qiKa8XSM/1tiMPOh8KwESp2+lbOe05UU7f1JUzrUeNtcToU7nt7w==}
+    peerDependencies:
+      '@angular/common': '>=12.0.0'
+      '@angular/core': '>=12.0.0'
+      '@angular/forms': '>=12.0.0'
+      '@angular/router': '>=12.0.0'
+      '@ng-web-apis/common': '>=2.0.0'
+      '@ng-web-apis/mutation-observer': '>=2.0.0'
+      '@taiga-ui/cdk': '>=3.19.0'
+      '@taiga-ui/core': '>=3.19.0'
+      '@taiga-ui/i18n': '>=3.19.0'
+      '@tinkoff/ng-polymorpheus': '>=4.0.0'
+      rxjs: '>=6.0.0'
+    dependencies:
+      '@angular/common': 15.1.5_w2a4ar2ssyezibn6c65i4snjzu
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      '@angular/forms': 15.1.5_kkteiffnjutwxhimrtvkwyrg3a
+      '@angular/router': 15.1.5_kkteiffnjutwxhimrtvkwyrg3a
+      '@ng-web-apis/intersection-observer': 3.0.0_@angular+core@15.1.5
+      '@taiga-ui/cdk': 3.19.0_nonsgekq3wybw3gbyt2d7lvbkq
+      '@taiga-ui/core': 3.19.0_knts34a6hkeswrds4whn5kqzse
+      rxjs: 7.5.7
+      text-mask-core: 5.1.2
+      tslib: 2.5.0
+    dev: false
+
+  /@taiga-ui/styles/3.19.0:
+    resolution: {integrity: sha512-mxqvE3H8RBwKZ4SijJdVPgZDYN++Idg3f+W3LOM4EAEPgBfEtF3sLIqIBzIbOxlU55Gd+CKGNoK5FwDqTAHP3g==}
+    dev: false
+
+  /@tinkoff/ng-dompurify/3.0.0_bi7cssckait2ho7aggq2g5i7bm:
+    resolution: {integrity: sha512-Gx153lEakv4nEDZXFd2vW2zK8fI7fJMu8ZaRaPgGcq1wrAe0ps/mCZdg9KXNdyLUvwTu3WFsJXj5CwCG6Zfucg==}
+    peerDependencies:
+      '@angular/core': '>=4.0.0'
+      '@angular/platform-browser': '>=4.0.0'
+      '@types/dompurify': '>=2.0.0'
+      dompurify: '>=2.0.0'
+    dependencies:
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      '@angular/platform-browser': 15.1.5_s7kwnqxnlkypgp4vtemlnxkbmi
+      '@types/dompurify': 2.2.3
+      dompurify: 2.2.9
+      tslib: 1.14.1
+    dev: false
+
+  /@tinkoff/ng-event-plugins/3.1.0_oasloymih2qwpklphtnzvarrl4:
+    resolution: {integrity: sha512-HqLBes/3MV469L1S08uBqmPUIwihx43py+8Lee1Me9jMFM1ZMuAC3NcS/njUFI1OzXU2kIPyUDEw2jmVbg8mWQ==}
+    peerDependencies:
+      '@angular/core': '>=12.0.0'
+      '@angular/platform-browser': '>=12.0.0'
+      rxjs: '>=6.0.0'
+    dependencies:
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      '@angular/platform-browser': 15.1.5_s7kwnqxnlkypgp4vtemlnxkbmi
+      rxjs: 7.5.7
+      tslib: 2.5.0
+    dev: false
+
+  /@tinkoff/ng-polymorpheus/4.0.10_@angular+core@15.1.5:
+    resolution: {integrity: sha512-BxHSwj9CertJ3qiamZ52NTpsKn81EZHjDwiph8mXiEeKXpuPaDn6e5wmTWdW8mYexLPtBsxmCRvZ9vapw4F1kA==}
+    peerDependencies:
+      '@angular/core': '>=12.0.0'
+    dependencies:
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      tslib: 2.5.0
+    dev: false
+
   /@tootallnate/once/2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
@@ -3720,6 +3969,16 @@ packages:
   /@trysound/sax/0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
+
+  /@ts-morph/common/0.9.2:
+    resolution: {integrity: sha512-IPyg+c3Am0EBoa63W0f/AKeLrJhvzMzQ4BIvD1baxLopmiHOj1HFTXYxC6e8iTZ+UYtN+/WFM9UyGRnoA20b8g==}
+    dependencies:
+      fast-glob: 3.2.12
+      minimatch: 3.1.2
+      mkdirp: 1.0.4
+      path-browserify: 1.0.1
+    dev: false
+    optional: true
 
   /@tsconfig/node10/1.0.9:
     resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==}
@@ -3779,6 +4038,11 @@ packages:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
       '@types/node': 18.7.1
+
+  /@types/dompurify/2.2.3:
+    resolution: {integrity: sha512-CLtc2mZK8+axmrz1JqtpklO/Kvn38arGc8o1l3UVopZaXXuer9ONdZwJ/9f226GrhRLtUmLr9WrvZsRSNpS8og==}
+    dependencies:
+      '@types/trusted-types': 2.0.3
 
   /@types/eslint-scope/3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
@@ -3858,6 +4122,11 @@ packages:
 
   /@types/mime/3.0.1:
     resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==}
+
+  /@types/minimatch/3.0.5:
+    resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
+    dev: false
+    optional: true
 
   /@types/node/14.18.36:
     resolution: {integrity: sha512-FXKWbsJ6a1hIrRxv+FoukuHnGTgEzKYGi7kilfMae96AL9UNkPFNWJEEYWzdRI9ooIkbr4AKldyuSTLql06vLQ==}
@@ -3945,6 +4214,9 @@ packages:
   /@types/tough-cookie/4.0.2:
     resolution: {integrity: sha512-Q5vtl1W5ue16D+nIaW8JWebSSraJVlK+EthKn7e7UcD4KWsaSJ8BqGPXNaPghgtcn/fhvrN17Tv8ksUsQpiplw==}
     dev: true
+
+  /@types/trusted-types/2.0.3:
+    resolution: {integrity: sha512-NfQ4gyz38SL8sDNrSixxU2Os1a5xcdFxipAFxYEuLUlvU2uDwS4NUpsImcf1//SlWItCVMMLiylsxbmNMToV/g==}
 
   /@types/validator/13.7.12:
     resolution: {integrity: sha512-YVtyAPqpefU+Mm/qqnOANW6IkqKpCSrarcyV269C8MA8Ux0dbkEuQwM/4CjL47kVEM2LgBef/ETfkH+c6+moFA==}
@@ -4535,6 +4807,12 @@ packages:
       deep-equal: 2.2.0
     dev: true
 
+  /array-differ/3.0.0:
+    resolution: {integrity: sha512-THtfYS6KtME/yIAhKjZ2ul7XI96lQGHRputJQHO80LAWQnuGP4iCIN8vdMRboGbIEYBwU33q8Tch1os2+X0kMg==}
+    engines: {node: '>=8'}
+    dev: false
+    optional: true
+
   /array-flatten/1.1.1:
     resolution: {integrity: sha512-PCVAQswWemu6UdxsDFFX/+gVeYqKAod3D3UVm91jHwynguOwAvYPhx8nNlM++NqRcK6CxxpUafjmhIdKiHibqg==}
 
@@ -4544,11 +4822,16 @@ packages:
   /array-union/2.1.0:
     resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
     engines: {node: '>=8'}
-    dev: true
 
   /array-union/3.0.1:
     resolution: {integrity: sha512-1OvF9IbWwaeiM9VhzYXVQacMibxpXOMYVNIvMtKRyX9SImBXpKcFr8XvFDeEslCyuH/t6KRt7HEO94AlP8Iatw==}
     engines: {node: '>=12'}
+
+  /arrify/2.0.1:
+    resolution: {integrity: sha512-3duEwti880xqi4eAMN8AyR4a0ByT90zoYdLlevfrvU43vb0YZwZVfxOgxWrLXXXpyugL0hNZc9G6BiB5B3nUug==}
+    engines: {node: '>=8'}
+    dev: false
+    optional: true
 
   /asap/2.0.6:
     resolution: {integrity: sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==}
@@ -5170,6 +5453,11 @@ packages:
   /co/4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
+
+  /code-block-writer/10.1.1:
+    resolution: {integrity: sha512-67ueh2IRGst/51p0n6FvPrnRjAGHY5F8xdjkgrYE7DDzpJe6qA07RYQ9VcoUeo5ATOjSOiWpSL3SWBRRbempMw==}
+    dev: false
+    optional: true
 
   /collect-v8-coverage/1.0.1:
     resolution: {integrity: sha512-iBPtljfCNcTKNAto0KEtDfZ3qzjJvqE3aTGZsbhjSBlorqpXJlaWWtPO35D+ZImoC3KWejX64o+yPGxhWSTzfg==}
@@ -5859,6 +6147,10 @@ packages:
     dependencies:
       domelementtype: 2.3.0
 
+  /dompurify/2.2.9:
+    resolution: {integrity: sha512-+9MqacuigMIZ+1+EwoEltogyWGFTJZWU3258Rupxs+2CGs4H914G9er6pZbsme/bvb5L67o2rade9n21e4RW/w==}
+    dev: false
+
   /domutils/2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}
     dependencies:
@@ -5951,6 +6243,12 @@ packages:
 
   /entities/2.2.0:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
+
+  /entities/4.4.0:
+    resolution: {integrity: sha512-oYp7156SP8LkeGD0GF85ad1X9Ai79WtRsZ2gxJqtBuzH+98YUV6jkHEKlZkMbcrjJjIVJNIDP/3WL9wQkoPbWA==}
+    engines: {node: '>=0.12'}
+    dev: false
+    optional: true
 
   /env-paths/2.2.1:
     resolution: {integrity: sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==}
@@ -6720,7 +7018,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.5
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
 
@@ -7544,9 +7842,9 @@ packages:
       jest-environment-node: 28.1.3
       jest-get-type: 28.0.2
       jest-regex-util: 28.0.2
-      jest-resolve: 28.1.1
+      jest-resolve: 28.1.3
       jest-runner: 28.1.3
-      jest-util: 28.1.1
+      jest-util: 28.1.3
       jest-validate: 28.1.3
       micromatch: 4.0.5
       parse-json: 5.2.0
@@ -7813,10 +8111,10 @@ packages:
       graceful-fs: 4.2.10
       jest-haste-map: 28.1.3
       jest-pnp-resolver: 1.2.3_jest-resolve@28.1.1
-      jest-util: 28.1.1
+      jest-util: 28.1.3
       jest-validate: 28.1.3
       resolve: 1.22.1
-      resolve.exports: 1.1.0
+      resolve.exports: 1.1.1
       slash: 3.0.0
 
   /jest-resolve/28.1.3:
@@ -8100,6 +8398,11 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
+  /jsonc-parser/3.0.0:
+    resolution: {integrity: sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==}
+    dev: false
+    optional: true
+
   /jsonc-parser/3.2.0:
     resolution: {integrity: sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==}
 
@@ -8147,6 +8450,10 @@ packages:
     dependencies:
       jwa: 1.4.1
       safe-buffer: 5.2.1
+    dev: false
+
+  /jwt-decode/3.1.2:
+    resolution: {integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==}
     dev: false
 
   /karma-source-map-support/1.4.0:
@@ -8531,6 +8838,13 @@ packages:
   /minimalistic-assert/1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
 
+  /minimatch/3.0.4:
+    resolution: {integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==}
+    dependencies:
+      brace-expansion: 1.1.11
+    dev: false
+    optional: true
+
   /minimatch/3.0.5:
     resolution: {integrity: sha512-tUpxzX0VAzJHjLu0xUfFv1gwVp9ba3IOuRAVH2EGuRW8a5emA2FlACLqiT/lDVtS1W+TGNwqz3sWaNyLgDJWuw==}
     dependencies:
@@ -8673,6 +8987,18 @@ packages:
       dns-packet: 5.4.0
       thunky: 1.1.0
 
+  /multimatch/5.0.0:
+    resolution: {integrity: sha512-ypMKuglUrZUD99Tk2bUQ+xNQj43lPEfAeX2o9cTteAmShXy2VHDJpuwu1o0xqoKCt9jLVAvwyFKdLTPXKAfJyA==}
+    engines: {node: '>=10'}
+    dependencies:
+      '@types/minimatch': 3.0.5
+      array-differ: 3.0.0
+      array-union: 2.1.0
+      arrify: 2.0.1
+      minimatch: 3.1.2
+    dev: false
+    optional: true
+
   /mute-stream/0.0.8:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
 
@@ -8741,6 +9067,20 @@ packages:
 
   /neo-async/2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
+
+  /ng-morph/2.1.0:
+    resolution: {integrity: sha512-jn34Ter6HlY7E3yOoMhfk3cnUwjLlvcGTsAJ7jS0pZ3SAGi3hzqlf3oyUQO6fNfbFnydc33yNqQtUIrbHKCtNA==}
+    requiresBuild: true
+    peerDependencies:
+      '@angular-devkit/core': '>=11.0.0'
+      '@angular-devkit/schematics': '>=11.0.0'
+    dependencies:
+      jsonc-parser: 3.0.0
+      minimatch: 3.0.4
+      multimatch: 5.0.0
+      ts-morph: 10.0.2
+    dev: false
+    optional: true
 
   /nice-napi/1.0.2:
     resolution: {integrity: sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA==}
@@ -9282,6 +9622,14 @@ packages:
   /parse5/6.0.1:
     resolution: {integrity: sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==}
 
+  /parse5/7.1.2:
+    resolution: {integrity: sha512-Czj1WaSVpaoj0wbhMzLmWD69anp2WH7FXMB9n1Sy8/ZFF9jolSQVMu1Ij5WIyGmcBmhk7EOndpO4mIpihVqAXw==}
+    requiresBuild: true
+    dependencies:
+      entities: 4.4.0
+    dev: false
+    optional: true
+
   /parseurl/1.3.3:
     resolution: {integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==}
     engines: {node: '>= 0.8'}
@@ -9313,6 +9661,11 @@ packages:
       pause: 0.0.1
       utils-merge: 1.0.1
     dev: false
+
+  /path-browserify/1.0.1:
+    resolution: {integrity: sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==}
+    dev: false
+    optional: true
 
   /path-exists/4.0.0:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
@@ -10105,7 +10458,7 @@ packages:
   /safer-buffer/2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  /sass-loader/12.6.0_sass@1.58.2+webpack@5.75.0:
+  /sass-loader/12.6.0_sass@1.58.3+webpack@5.75.0:
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -10126,7 +10479,7 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      sass: 1.58.2
+      sass: 1.58.3
       webpack: 5.75.0
 
   /sass-loader/13.2.0_sass@1.57.1+webpack@5.75.0:
@@ -10153,6 +10506,30 @@ packages:
       sass: 1.57.1
       webpack: 5.75.0_esbuild@0.16.17
 
+  /sass-loader/13.2.0_sass@1.58.3:
+    resolution: {integrity: sha512-JWEp48djQA4nbZxmgC02/Wh0eroSUutulROUusYJO9P9zltRbNN80JCBHqRGzjd4cmZCa/r88xgfkjGD0TXsHg==}
+    engines: {node: '>= 14.15.0'}
+    peerDependencies:
+      fibers: '>= 3.1.0'
+      node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
+      sass: ^1.3.0
+      sass-embedded: '*'
+      webpack: ^5.0.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+    dependencies:
+      klona: 2.0.6
+      neo-async: 2.6.2
+      sass: 1.58.3
+    dev: false
+
   /sass/1.57.1:
     resolution: {integrity: sha512-O2+LwLS79op7GI0xZ8fqzF7X2m/m8WFfI02dHOdsK5R2ECeS5F62zrwg/relM1rjSLy7Vd/DiMNIvPrQGsA0jw==}
     engines: {node: '>=12.0.0'}
@@ -10162,8 +10539,8 @@ packages:
       immutable: 4.2.4
       source-map-js: 1.0.2
 
-  /sass/1.58.2:
-    resolution: {integrity: sha512-2mbyOWOv/lhEXD6nVrQZQ4KT2DlwcODbTskM42EyqBAFUWOhiiYtAXZqjZz1ygzapYf+N+2GwfIH9M5FM4GUMg==}
+  /sass/1.58.3:
+    resolution: {integrity: sha512-Q7RaEtYf6BflYrQ+buPudKR26/lH+10EmO9bBqbmPh/KeLqv8bjpTNqxe71ocONqXq+jYiCbpPUmQMS+JJPk4A==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
@@ -10856,6 +11233,10 @@ packages:
       glob: 7.2.3
       minimatch: 3.1.2
 
+  /text-mask-core/5.1.2:
+    resolution: {integrity: sha512-VfkCMdmRRZqXgQZFlDMiavm3hzsMzBM23CxHZsaeAYg66ZhXCNJWrFmnJwNy8KF9f74YvAUAuQenxsMCfuvhUw==}
+    dev: false
+
   /text-table/0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
 
@@ -11015,6 +11396,14 @@ packages:
       semver: 7.3.8
       typescript: 4.8.4
       webpack: 5.75.0
+
+  /ts-morph/10.0.2:
+    resolution: {integrity: sha512-TVuIfEqtr9dW25K3Jajqpqx7t/zLRFxKu2rXQZSDjTm4MO4lfmuj1hn8WEryjeDDBFcNOCi+yOmYUYR4HucrAg==}
+    dependencies:
+      '@ts-morph/common': 0.9.2
+      code-block-writer: 10.1.1
+    dev: false
+    optional: true
 
   /ts-node/10.9.1_rhpwi32gjip3gggyfzgffz3q2q:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}

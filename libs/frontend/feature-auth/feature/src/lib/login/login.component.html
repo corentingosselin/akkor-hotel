@@ -1,0 +1,53 @@
+<div class="container top-padding">
+  <div class="content">
+    <form [formGroup]="form" (submit)="login()">
+      <div class="flex-column-gap">
+        <h1>Login to your account</h1>
+
+        <tui-notification
+          *ngIf="error$ | async"
+          status="error"
+          [hasIcon]="true"
+        >
+          {{ error$ | async }}
+        </tui-notification>
+
+        <div>
+          <tui-input formControlName="emailControl">
+            Type an email
+            <input tuiTextfield type="email" />
+          </tui-input>
+
+          <tui-error
+            formControlName="emailControl"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+
+        <div>
+          <tui-input-password formControlName="passwordControl">
+            Type a password
+            <input tuiTextfield placeholder="Make it secure!" />
+          </tui-input-password>
+          <tui-error
+            formControlName="passwordControl"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+
+        <a tuiLink href="#">You do not have account yet ?</a>
+        <div>
+          <tui-loader
+            [showLoader]="(loading$ | async)!"
+            [inheritColor]="true"
+            [overlay]="true"
+          >
+            <button tuiButton [style.width.%]="100" size="l" type="submit">
+              Login
+            </button>
+          </tui-loader>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
+body {
+  background-color: #1b1b1b;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 5rem;
+}
+
+.content {
+  width:  80%;
+  max-width: 40rem;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row-gap {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.flex-column-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

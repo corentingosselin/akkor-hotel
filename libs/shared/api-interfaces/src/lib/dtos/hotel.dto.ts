@@ -49,10 +49,10 @@ export class UpdateHotelDto {
 
 export class CreateBookingDto {
   @IsString()
-  startDate!: string;
+  startDate!: Date;
 
   @IsString()
-  endDate!: string;
+  endDate!: Date;
 
   @IsNumber()
   hotelId!: number;

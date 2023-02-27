@@ -26,7 +26,7 @@ export class UserController {
   @Put()
   @Roles(UserRole.ADMIN)
   async update(@Body() updateUser: UpdateUserDto) {
-    return this.userService.update(updateUser);
+    return await this.userService.update(updateUser);
   }
 
   @UseGuards(RoleGuard)
@@ -36,13 +36,13 @@ export class UserController {
     if (req.user.userId != id) {
       return new BadRequestException('You can only delete your own account');
     }
-    return this.userService.delete(req.user.userId);
+    return await this.userService.delete(req.user.userId);
   }
 
   @UseGuards(RoleGuard)
   @Roles(UserRole.ADMIN, UserRole.EMPLOYEE)
   @Get(':id')
   async get(@Param('id') id: number) {
-    return this.userService.getUserById(id);
+    return await this.userService.getUserById(id);
   }
 }

@@ -26,8 +26,8 @@ beforeAll(async () => {
 
   dataSource = module.get<DataSource>(DataSource);
 
-  adminUser = await createAdminUser(dataSource);
-  dummyUser = await createDummyUser(dataSource);
+  adminUser = await createAdminUser(dataSource,'user');
+  dummyUser = await createDummyUser(dataSource, 'user');
 });
 
 describe('/user (GET)', () => {
@@ -86,11 +86,15 @@ describe('/user (DELETE)', () => {
     expect(response.status).toBe(200);
     expect(response.data).toBe(true);
 
+    let errorThrown = false;
     await adminUser.client
       .sendRequest(HttpMethod.GET, `/user/${dummyUser.user.id}`)
       .catch((e) => {
         expect(e.response.status).toBe(404);
+        errorThrown = true;
       });
+      expect(errorThrown).toBe(true);
+
   });
 });
 

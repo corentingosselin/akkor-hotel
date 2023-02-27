@@ -31,8 +31,7 @@
         "buildTarget": "backend:build"
       },
       "configurations": {
-        "test": {
-        },
+        "test": {},
         "production": {
           "buildTarget": "backend:build:production"
         }

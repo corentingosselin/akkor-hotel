@@ -26,54 +26,51 @@ export class BookingController {
   @Post()
   async create(@Body() booking: CreateBookingDto, @Req() req) {
     const userId = req.user.userId;
-    return this.bookingService.createByUser(userId, booking);
+    return await this.bookingService.createByUser(userId, booking);
   }
 
   @UseGuards(RoleGuard)
   @Roles(UserRole.ADMIN, UserRole.EMPLOYEE)
   @Post()
   async createByStaff(@Body() booking: CreateBookingDto) {
-    return this.bookingService.createByStaff(booking);
+    return await this.bookingService.createByStaff(booking);
   }
-
 
   @UseGuards(RoleGuard)
   @Roles(UserRole.USER)
   @Delete(':id')
   async delete(@Param('id') id: number, @Req() req) {
-    const userId = req.user.userId;
-    return this.bookingService.deleteByUser(userId, id);
+    const userId = req.user.userId as number;
+    return await this.bookingService.deleteByUser(userId, id);
   }
 
   @UseGuards(RoleGuard)
   @Roles(UserRole.ADMIN, UserRole.EMPLOYEE)
   @Delete(':id')
   async staffDelete(@Param('id') id: number) {
-    return this.bookingService.deleteByStaff(id);
+    return await this.bookingService.deleteByStaff(id);
   }
 
 
-  @UseGuards()
+  @UseGuards(RoleGuard)
+  @Roles(UserRole.USER)
   @Get(':id')
   async get(@Param('id') id: number) {
-    return this.bookingService.getById(id);
+    return await this.bookingService.getById(id);
   }
-
-  
 
   @UseGuards(RoleGuard)
   @Roles(UserRole.USER)
   @Get()
   async getAllByUser(@Req() req) {
-    //get user id from token
-    const userId = req.user.id;
-    return this.bookingService.getAllByUser(userId);
+    const userId = req.user.userId;
+    return await this.bookingService.getAllByUser(userId);
   }
 
   @UseGuards(RoleGuard)
   @Roles(UserRole.ADMIN)
-  @Get()
-  async getAll(@Body() username: string) {
-    return this.bookingService.findBookingByEmailOrPseudo(username);
+  @Get('user/:username')
+  async getAll(@Param('username') username: string) {
+    return await this.bookingService.findBookingByEmailOrPseudo(username);
   }
 }

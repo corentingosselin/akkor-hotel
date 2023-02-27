@@ -17,6 +17,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     const user = await this.userService.findOneByEmailOrPseudo(
       loginDto.username
     );
+
     if (user && verify(user.password, loginDto.password)) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
