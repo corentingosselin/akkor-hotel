@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TuiButtonModule, TuiErrorModule, TuiLinkModule, TuiLoaderModule, TuiNotificationModule} from '@taiga-ui/core';
+import { TuiButtonModule, TuiErrorModule, TuiLinkModule, TuiLoaderModule, TuiNotificationModule } from '@taiga-ui/core';
 import {
   TuiFieldErrorPipeModule, TuiInputModule,
   TuiInputPasswordModule
@@ -34,4 +34,6 @@ const TUI_MODULES = [
   exports: [RegisterComponent, LoginComponent],
   declarations: [RegisterComponent, LoginComponent],
 })
-export class FrontendFeatureAuthFeatureModule {}
+export class FrontendFeatureAuthFeatureModule {
+
+}

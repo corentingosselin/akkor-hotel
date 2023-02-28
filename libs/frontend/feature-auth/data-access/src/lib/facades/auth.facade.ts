@@ -1,4 +1,5 @@
 import {
+  JwtUserSession,
   LoginUserDto,
   RegisterUserDto,
   SessionResponse
@@ -7,6 +8,7 @@ import { LoadingErrorService } from '@akkor-hotel/shared/frontend';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import decode from 'jwt-decode';
 import {
   BehaviorSubject,
   catchError, filter,
@@ -14,18 +16,17 @@ import {
   tap,
   throwError
 } from 'rxjs';
-import { FrontendFeatureAuthDataAccessModule } from '../frontend-feature-auth-data-access.module';
 import { AuthService } from '../services/auth.service';
-import { JwtService } from '@nestjs/jwt';
+
+
 @Injectable({
-  providedIn: FrontendFeatureAuthDataAccessModule,
+  providedIn: 'root',
 })
 export class AuthFacade {
   constructor(
     private readonly authService: AuthService,
     private readonly loadingErrorService: LoadingErrorService,
     private route: Router,
-    private readonly jwtService: JwtService
 
   ) {}
 
@@ -44,7 +45,7 @@ export class AuthFacade {
         filter((session) => !!session.access_token),
         tap((session) => {
           this.loggedIn$.next(session);
-          localStorage.setItem('access_token', session.access_token);
+          localStorage.setItem('userSession',  JSON.stringify(session));
           this.loadingErrorService.hideLoading();
           this.route.navigate(['/home']);
         }),
@@ -68,21 +69,33 @@ export class AuthFacade {
       .subscribe();
   }
 
+  clearUserSession() {
+    localStorage.removeItem('userSession');
+    this.loggedIn$.next(null);
+  }
+
   isAuthenticated(): boolean {
-    const accessToken = localStorage.getItem('access_token');
-    if(!accessToken) {
+    const storedSession = localStorage.getItem('userSession');
+    if(!storedSession) {
+      this.clearUserSession();
       this.loggedIn$.next(null);
       return false;
     }
+    const session = JSON.parse(storedSession) as SessionResponse;
 
-
-
-    return !!localStorage.getItem('access_token');
+    const decodedToken = decode(session.access_token) as JwtUserSession;
+    const expirationDate = new Date(0);
+    expirationDate.setUTCSeconds(decodedToken.exp? decodedToken.exp : 0);
+    if (expirationDate < new Date()) {
+      this.clearUserSession();
+      return false;
+    }
+    this.loggedIn$.next(session);
+    return true;
   }
 
   logout(): void {
-    localStorage.removeItem('access_token');
-    this.loggedIn$.next(null);
+    this.clearUserSession();
     this.route.navigate(['/login']);
   }
 
@@ -95,7 +108,7 @@ export class AuthFacade {
         filter((session) => !!session.access_token),
         tap((session) => {
           this.loggedIn$.next(session);
-          localStorage.setItem('access_token', session.access_token);
+          localStorage.setItem('userSession', JSON.stringify(session));
           this.loadingErrorService.hideLoading();
           this.route.navigate(['/home']);
         }),

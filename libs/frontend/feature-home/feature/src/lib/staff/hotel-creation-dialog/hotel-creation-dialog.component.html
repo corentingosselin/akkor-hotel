@@ -1,0 +1,107 @@
+<div class="container">
+    <div class="content">
+      <form [formGroup]="form" (submit)="createHotel()">
+        <div class="flex-column-gap">
+          <h1>Create new hotel</h1>
+  
+          <tui-notification
+            *ngIf="error$ | async"
+            status="error"
+            [hasIcon]="true"
+          >
+            {{ error$ | async }}
+          </tui-notification>
+  
+  
+          <div>
+            <tui-input formControlName="nameControl">
+              Name
+              <input tuiTextfield type="text" />
+            </tui-input>
+  
+            <tui-error
+              formControlName="nameControl"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
+          </div>
+  
+          <div>
+            <tui-input formControlName="descriptionControl">
+              Description
+              <input tuiTextfield type="text" />
+            </tui-input>
+  
+            <tui-error
+              formControlName="descriptionControl"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
+          </div>
+  
+          <div>
+            <tui-input formControlName="cityControl">
+              City
+              <input tuiTextfield type="text" />
+            </tui-input>
+  
+            <tui-error
+              formControlName="cityControl"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
+          </div>
+
+          <div>
+            <tui-input formControlName="addressControl">
+              Address
+              <input tuiTextfield type="text" />
+            </tui-input>
+  
+            <tui-error
+              formControlName="addressControl"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
+          </div>
+          
+          <div>
+            <tui-input formControlName="countryControl">
+              Country
+              <input tuiTextfield type="text" />
+            </tui-input>
+  
+            <tui-error
+              formControlName="countryControl"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
+          </div>
+          
+
+          <div>
+            <tui-input formControlName="pictureControl">
+              Image
+              <input tuiTextfield type="text" />
+            </tui-input>
+  
+            <tui-error
+              formControlName="pictureControl"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
+          </div>
+          
+  
+  
+  
+          <div>
+            <tui-loader
+              [showLoader]="(loading$ | async)!"
+              [inheritColor]="true"
+              [overlay]="true"
+            >
+              <button tuiButton [style.width.%]="100" size="l" type="submit">
+                Register
+              </button>
+            </tui-loader>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

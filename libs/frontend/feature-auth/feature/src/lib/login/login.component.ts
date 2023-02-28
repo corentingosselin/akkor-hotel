@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { AuthFacade } from '@akkor-hotel/frontend/feature-auth/data-access';
-import { LoginUserDto } from '@akkor-hotel/shared/api-interfaces';
 import { LoadingErrorService } from '@akkor-hotel/shared/frontend';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -35,6 +35,9 @@ export class LoginComponent {
   });
   login() {
     if (!this.form.valid) return;
-    this.authFacade.login(this.form.value as LoginUserDto);
+    this.authFacade.login({
+      username: this.form.controls.emailControl.value!,
+      password: this.form.controls.passwordControl.value!,
+    });
   }
 }

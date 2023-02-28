@@ -1,1 +1,2 @@
-export * from './lib/frontend-feature-home-data-access.module';
+export * from './lib/services/hotel.service';
+export * from './lib/facade/hotel.facade';

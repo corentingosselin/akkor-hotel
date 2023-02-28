@@ -1,4 +1,5 @@
 import {
+  CreatedHotelResponse,
   CreateHotelDto,
   UpdateHotelDto,
 } from '@akkor-hotel/shared/api-interfaces';
@@ -35,8 +36,9 @@ export class HotelService {
     return hotels;
   }
 
-  async create(hotel: CreateHotelDto) {
-    return this.hotelRepository.save(hotel);
+  async create(hotel: CreateHotelDto) : Promise<CreatedHotelResponse> {
+    const hotelEntity = this.hotelRepository.save(hotel);
+    return hotelEntity;
   }
 
   async delete(id: number) {

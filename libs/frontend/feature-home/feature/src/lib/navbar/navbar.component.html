@@ -1,0 +1,40 @@
+<nav>
+  <a
+    class="home"
+    tuiIconButton
+    type="button"
+    routerLink="/home"
+    size="m"
+    icon="tuiIconHomeLarge"
+  >
+  </a>
+
+  <tui-hosted-dropdown [content]="content" class="account">
+    <tui-avatar
+      new
+      text="alex inkin"
+      size="m"
+      avatarUrl="tuiIconUser"
+    ></tui-avatar>
+  </tui-hosted-dropdown>
+
+  <ng-template #content>
+    <tui-data-list class="dropdown-menu" role="menu">
+      <tui-opt-group>
+        <div class="my-account flex-row">
+          <tui-svg src="tuiIconUser"></tui-svg>
+          <a tuiOption> My Account</a>
+        </div>
+      </tui-opt-group>
+      <tui-opt-group>
+        <!--   Logout option -->
+        <div class="logout flex-row">
+          <tui-svg src="tuiIconLogOut"></tui-svg>
+          <button tuiOption (click)="logout()" class="logout-button">
+            Logout
+          </button>
+        </div>
+      </tui-opt-group>
+    </tui-data-list>
+  </ng-template>
+</nav>

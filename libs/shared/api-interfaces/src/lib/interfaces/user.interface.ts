@@ -18,6 +18,8 @@ export interface JwtUserSession {
   userId: number;
   email: string;
   role: UserRole;
+  exp?: number;
+  iat?: number;
 }
 
 

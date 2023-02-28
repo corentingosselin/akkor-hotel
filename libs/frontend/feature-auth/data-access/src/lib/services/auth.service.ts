@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { RegisterUserDto, SessionResponse } from '@akkor-hotel/shared/api-interfaces';
-import { FrontendFeatureAuthDataAccessModule } from '../frontend-feature-auth-data-access.module';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 
 @Injectable({
-  providedIn: FrontendFeatureAuthDataAccessModule
+  providedIn: 'root'
 })
 export class AuthService {
 

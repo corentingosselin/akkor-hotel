@@ -1,0 +1,48 @@
+
+
+nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2f2f2f;
+    width: 100%;
+    height: 4rem;
+    gap: 1rem;
+}
+
+
+
+
+.account {
+    position: absolute; 
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding-right: 1rem;
+}
+
+.home {
+    position: absolute; 
+    left: 0;
+    padding-left: 1rem;
+}
+
+.logout-button {
+    color: rgb(184, 21, 21);
+}
+
+.dropdown-menu {
+    width: 10rem;
+}
+
+.my-account {
+    align-items: center;
+}
+
+.logout {
+    color: rgb(184, 21, 21);
+    align-items: center;
+}

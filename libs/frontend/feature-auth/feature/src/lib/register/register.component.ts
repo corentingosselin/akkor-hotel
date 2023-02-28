@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { AuthFacade } from '@akkor-hotel/frontend/feature-auth/data-access';
 import { RegisterUserDto } from '@akkor-hotel/shared/api-interfaces';
 import { LoadingErrorService } from '@akkor-hotel/shared/frontend';
@@ -40,43 +41,31 @@ export class RegisterComponent {
   readonly error$ = this.loadingErrorService.errorStatus$;
   readonly loading$ = this.loadingErrorService.loadingStatus$;
 
-  readonly form = new FormGroup(
-    {
-      emailControl: new FormControl('', [
-        Validators.required,
-        Validators.email,
-      ]),
-      passwordControl: new FormControl('', [
-        Validators.required,
-        passwordValidator(),
-        matchValidator('confirmPasswordControl', true)
-      ]),
-      confirmPasswordControl: new FormControl('', [Validators.required,  matchValidator('passwordControl')]),
-      lastNameControl: new FormControl('', [Validators.required]),
-      firstNameControl: new FormControl('', [Validators.required]),
-      pseudoControl: new FormControl('', [Validators.required]),
-    }
-  );
+  readonly form = new FormGroup({
+    emailControl: new FormControl('', [Validators.required, Validators.email]),
+    passwordControl: new FormControl('', [
+      Validators.required,
+      passwordValidator(),
+      matchValidator('confirmPasswordControl', true),
+    ]),
+    confirmPasswordControl: new FormControl('', [
+      Validators.required,
+      matchValidator('passwordControl'),
+    ]),
+    lastNameControl: new FormControl('', [Validators.required]),
+    firstNameControl: new FormControl('', [Validators.required]),
+    pseudoControl: new FormControl('', [Validators.required]),
+  });
   register() {
-    console.log(this.form.errors);
     if (this.form.invalid) return;
-    const {
-      emailControl,
-      passwordControl,
-      confirmPasswordControl,
-      lastNameControl,
-      firstNameControl,
-      pseudoControl,
-    } = this.form.value;
-
     this.authFacade.register({
-      email: emailControl,
-      password: passwordControl,
-      confirmPassword: confirmPasswordControl,
-      lastName: lastNameControl,
-      firstName: firstNameControl,
-      pseudo: pseudoControl,
-    } as RegisterUserDto);
+      email: this.form.controls.emailControl.value!,
+      password: this.form.controls.passwordControl.value!,
+      lastName: this.form.controls.lastNameControl.value!,
+      firstName: this.form.controls.firstNameControl.value!,
+      pseudo: this.form.controls.pseudoControl.value!,
+      confirmPassword: this.form.controls.confirmPasswordControl.value!,
+    });
   }
 }
 
@@ -92,11 +81,10 @@ function passwordValidator(): ValidatorFn {
 }
 
 export function matchValidator(
-  matchTo: string, 
+  matchTo: string,
   reverse?: boolean
 ): ValidatorFn {
-  return (control: AbstractControl): 
-  ValidationErrors | null => {
+  return (control: AbstractControl): ValidationErrors | null => {
     if (control.parent && reverse) {
       const c = (control.parent?.controls as any)[matchTo] as AbstractControl;
       if (c) {
@@ -106,8 +94,7 @@ export function matchValidator(
     }
     return !!control.parent &&
       !!control.parent.value &&
-      control.value === 
-      (control.parent?.controls as any)[matchTo].value
+      control.value === (control.parent?.controls as any)[matchTo].value
       ? null
       : { matching: true };
   };

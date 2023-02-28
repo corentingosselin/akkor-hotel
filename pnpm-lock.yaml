@@ -27,6 +27,7 @@ specifiers:
   '@nestjs/swagger': ^6.2.1
   '@nestjs/testing': ^9.0.0
   '@nestjs/typeorm': ^9.0.1
+  '@ngneat/until-destroy': ^9.2.3
   '@nrwl/angular': ^15.6.3
   '@nrwl/cypress': 15.6.3
   '@nrwl/eslint-plugin-nx': 15.6.3
@@ -43,6 +44,7 @@ specifiers:
   '@taiga-ui/kit': ^3.19.0
   '@taiga-ui/styles': ^3.19.0
   '@tinkoff/ng-dompurify': 3.0.0
+  '@tinkoff/ng-polymorpheus': ^4.0.10
   '@types/dompurify': 2.2.3
   '@types/jest': 28.1.1
   '@types/node': 18.7.1
@@ -64,6 +66,7 @@ specifiers:
   jest-preset-angular: ~12.2.3
   jwt-decode: ^3.1.2
   mysql2: ^3.1.2
+  ngx-take-until-destroy: ^5.4.0
   nx: 15.6.3
   passport: ^0.6.0
   passport-jwt: ^4.0.1
@@ -99,14 +102,16 @@ dependencies:
   '@nestjs/platform-express': 9.3.9_77foi4w27ghy47yutmnzv7krjy
   '@nestjs/swagger': 6.2.1_ldzmua2hsw2tga2e42i6lmmdty
   '@nestjs/typeorm': 9.0.1_mckk3uhdn45uhm27yjfmunxuam
+  '@ngneat/until-destroy': 9.2.3_w2a4ar2ssyezibn6c65i4snjzu
   '@nrwl/angular': 15.7.1_hfz2m537s3uxplmjiopiu67ide
-  '@taiga-ui/addon-mobile': 3.19.0_zhpnun72slw4b4e74ykopmvnzm
+  '@taiga-ui/addon-mobile': 3.19.0_hwsrelrcbea724ln5lopwratei
   '@taiga-ui/cdk': 3.19.0_nonsgekq3wybw3gbyt2d7lvbkq
-  '@taiga-ui/core': 3.19.0_knts34a6hkeswrds4whn5kqzse
+  '@taiga-ui/core': 3.19.0_u5mpdws5ftuenhh7j53u6kitvy
   '@taiga-ui/icons': 3.19.0
-  '@taiga-ui/kit': 3.19.0_m5og4ls3dxzzsqbr6sufknv53u
+  '@taiga-ui/kit': 3.19.0_phek4nmujbn2s2f54ajpu5z5mq
   '@taiga-ui/styles': 3.19.0
   '@tinkoff/ng-dompurify': 3.0.0_bi7cssckait2ho7aggq2g5i7bm
+  '@tinkoff/ng-polymorpheus': 4.0.10_@angular+core@15.1.5
   argon2: 0.30.3
   axios: 1.3.3
   class-transformer: 0.5.1
@@ -114,6 +119,7 @@ dependencies:
   dompurify: 2.2.9
   jwt-decode: 3.1.2
   mysql2: 3.1.2
+  ngx-take-until-destroy: 5.4.0_rxjs@7.5.7
   passport: 0.6.0
   passport-jwt: 4.0.1
   passport-local: 1.0.0
@@ -2852,6 +2858,17 @@ packages:
       tslib: 2.5.0
     dev: false
 
+  /@ngneat/until-destroy/9.2.3_w2a4ar2ssyezibn6c65i4snjzu:
+    resolution: {integrity: sha512-ryX0vqDOdmYo53f7v5Ivbj1jcqOEX+vM1iiV9NYepWDha4VJp9lWrDFK9tRt2evAMzF/9u67JLzs4Xjcoh+Taw==}
+    peerDependencies:
+      '@angular/core': '>=13'
+      rxjs: ^6.4.0 || ^7.0.0
+    dependencies:
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      rxjs: 7.5.7
+      tslib: 2.5.0
+    dev: false
+
   /@ngtools/webpack/15.1.6_2gl3cy67h547er6qppszlgqm4u:
     resolution: {integrity: sha512-ieHO6c3m+LZ93/B4n4QD908tUCkyNPFF9spMjJFZf8SRpLLvzOISMgiAej7UUxcBiB2kOfdVrpHf4Os4D9CsrQ==}
     engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
@@ -3796,7 +3813,7 @@ packages:
     resolution: {integrity: sha512-Uy0+khmZqUrUGm5dmMqVlnvufZRSK0FbYzVgp0UMstm+F5+W2/jnEEQyc9vo1ZR/E5ZI/B1WjjoTqBqwJL6Krw==}
     dev: false
 
-  /@taiga-ui/addon-mobile/3.19.0_zhpnun72slw4b4e74ykopmvnzm:
+  /@taiga-ui/addon-mobile/3.19.0_hwsrelrcbea724ln5lopwratei:
     resolution: {integrity: sha512-QTnv/BE6RoObhYf8Zu2cxhP9p4S9luzaaTVQMwWi22vGTYuoUdmjU5JXN4MXSO+EKGDTs/dxgy+D6hYIvQFEnQ==}
     peerDependencies:
       '@angular/cdk': '>=12.0.0'
@@ -3813,8 +3830,9 @@ packages:
       '@angular/common': 15.1.5_w2a4ar2ssyezibn6c65i4snjzu
       '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
       '@taiga-ui/cdk': 3.19.0_nonsgekq3wybw3gbyt2d7lvbkq
-      '@taiga-ui/core': 3.19.0_knts34a6hkeswrds4whn5kqzse
-      '@taiga-ui/kit': 3.19.0_m5og4ls3dxzzsqbr6sufknv53u
+      '@taiga-ui/core': 3.19.0_u5mpdws5ftuenhh7j53u6kitvy
+      '@taiga-ui/kit': 3.19.0_phek4nmujbn2s2f54ajpu5z5mq
+      '@tinkoff/ng-polymorpheus': 4.0.10_@angular+core@15.1.5
       rxjs: 7.5.7
       tslib: 2.5.0
     dev: false
@@ -3848,7 +3866,7 @@ packages:
       - '@angular/platform-browser'
     dev: false
 
-  /@taiga-ui/core/3.19.0_knts34a6hkeswrds4whn5kqzse:
+  /@taiga-ui/core/3.19.0_u5mpdws5ftuenhh7j53u6kitvy:
     resolution: {integrity: sha512-j/LbR5HWxSB3n1P8TQxlPtujIGeQXlrhEjekY2YP3L0ev5Q3AMqq8v5QRR0PbhGzzm6SfhIeOWzNX8ZpIRWG6Q==}
     peerDependencies:
       '@angular/animations': '>=12.0.0'
@@ -3872,6 +3890,7 @@ packages:
       '@angular/router': 15.1.5_kkteiffnjutwxhimrtvkwyrg3a
       '@taiga-ui/cdk': 3.19.0_nonsgekq3wybw3gbyt2d7lvbkq
       '@taiga-ui/i18n': 3.19.0_w2a4ar2ssyezibn6c65i4snjzu
+      '@tinkoff/ng-polymorpheus': 4.0.10_@angular+core@15.1.5
       rxjs: 7.5.7
       tslib: 2.5.0
     dev: false
@@ -3893,7 +3912,7 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /@taiga-ui/kit/3.19.0_m5og4ls3dxzzsqbr6sufknv53u:
+  /@taiga-ui/kit/3.19.0_phek4nmujbn2s2f54ajpu5z5mq:
     resolution: {integrity: sha512-fo0tpOGasOuXQQIZWl45Fp+w1PgChd/Oh+qiKa8XSM/1tiMPOh8KwESp2+lbOe05UU7f1JUzrUeNtcToU7nt7w==}
     peerDependencies:
       '@angular/common': '>=12.0.0'
@@ -3914,7 +3933,8 @@ packages:
       '@angular/router': 15.1.5_kkteiffnjutwxhimrtvkwyrg3a
       '@ng-web-apis/intersection-observer': 3.0.0_@angular+core@15.1.5
       '@taiga-ui/cdk': 3.19.0_nonsgekq3wybw3gbyt2d7lvbkq
-      '@taiga-ui/core': 3.19.0_knts34a6hkeswrds4whn5kqzse
+      '@taiga-ui/core': 3.19.0_u5mpdws5ftuenhh7j53u6kitvy
+      '@tinkoff/ng-polymorpheus': 4.0.10_@angular+core@15.1.5
       rxjs: 7.5.7
       text-mask-core: 5.1.2
       tslib: 2.5.0
@@ -9081,6 +9101,16 @@ packages:
       ts-morph: 10.0.2
     dev: false
     optional: true
+
+  /ngx-take-until-destroy/5.4.0_rxjs@7.5.7:
+    resolution: {integrity: sha512-e+VfCrHbLybdKWoQ8prdhmVzWI6vTnedr/9cVGQTkfepMdLz5D++VDk+Wnbs7mru6S9C+kIpNWUlh2YMPl928Q==}
+    deprecated: 'Important: For Angular v9+ please use the until-destroy library: https://github.com/ngneat/until-destroy\#use-with-ivy'
+    peerDependencies:
+      rxjs: ^6.0.0
+    dependencies:
+      rxjs: 7.5.7
+      tslib: 1.14.1
+    dev: false
 
   /nice-napi/1.0.2:
     resolution: {integrity: sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA==}

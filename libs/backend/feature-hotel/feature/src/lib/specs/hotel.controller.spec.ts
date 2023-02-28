@@ -1,6 +1,6 @@
 import { HotelEntity } from '@akkor-hotel/backend/feature-hotel/data-access';
 import { UserEntity } from '@akkor-hotel/backend/feature-user/data-access';
-import { CreateHotelDto } from '@akkor-hotel/shared/api-interfaces';
+import { CreatedHotelResponse, CreateHotelDto } from '@akkor-hotel/shared/api-interfaces';
 import {
   clearTables,
   createAdminUser,
@@ -43,7 +43,7 @@ const hotelDto: CreateHotelDto = {
   picture: 'test',
 };
 
-let generatedHotels: HotelEntity[];
+let generatedHotels: CreatedHotelResponse[];
 
 describe('/hotel (GET)', () => {
   it('user should get all hotels with default limit of 10', async () => {
@@ -64,7 +64,7 @@ describe('/hotel (GET)', () => {
     expect((response.data as []).length).toBe(5);
 
     //check sort order asc
-    const hotels = response.data as HotelEntity[];
+    const hotels = response.data as CreatedHotelResponse[];
     for (let i = 0; i < hotels.length - 1; i++) {
       expect(hotels[i].id).toBeLessThanOrEqual(hotels[i + 1].id);
     }
@@ -78,8 +78,8 @@ describe('/hotel (GET)', () => {
     expect(response.status).toBe(200);
     expect((response.data as []).length).toBe(5);
 
-    const hotelsReceived = response.data as HotelEntity[];
-    const hotels = response.data as HotelEntity[];
+    const hotelsReceived = response.data as CreatedHotelResponse[];
+    const hotels = response.data as CreatedHotelResponse[];
     //shuffling hotels
     for (let i = hotels.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -101,10 +101,10 @@ describe('/hotel (GET)', () => {
     );
     expect(response.status).toBe(200);
     expect((response.data as []).length).toBe(5);
-    const hotelsReceived = response.data as HotelEntity[];
+    const hotelsReceived = response.data as CreatedHotelResponse[];
 
     //check sort order asc by createdAt here
-    const hotels = response.data as HotelEntity[];
+    const hotels = response.data as CreatedHotelResponse[];
     //shuffling hotels
     for (let i = hotels.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -142,7 +142,7 @@ afterAll(async () => {
   await clearTables(dataSource);
 });
 
-async function generateRandomHotels() : Promise<HotelEntity[]> {
+async function generateRandomHotels() : Promise<CreatedHotelResponse[]> {
   const hotels = [];
   for (let i = 0; i < 20; i++) {
     const createHotelDto = {

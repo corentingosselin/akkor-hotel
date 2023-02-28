@@ -27,7 +27,7 @@
         <div>
           <tui-input-password formControlName="passwordControl">
             Type a password
-            <input tuiTextfield placeholder="Make it secure!" />
+            <input tuiTextfield/>
           </tui-input-password>
           <tui-error
             formControlName="passwordControl"
@@ -35,7 +35,7 @@
           ></tui-error>
         </div>
 
-        <a tuiLink href="#">You do not have account yet ?</a>
+        <a tuiLink routerLink="/register">You do not have account yet ?</a>
         <div>
           <tui-loader
             [showLoader]="(loading$ | async)!"

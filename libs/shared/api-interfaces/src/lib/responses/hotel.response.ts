@@ -8,3 +8,15 @@ export interface CreatedBookingResponse {
     created_at: Date;
     updated_at: Date;
 }
+
+export interface CreatedHotelResponse {
+    id: number;
+    name: string;
+    city: string;
+    address: string;
+    country: string;
+    description: string;
+    picture: string;
+    created_at: Date;
+    updated_at: Date;
+}

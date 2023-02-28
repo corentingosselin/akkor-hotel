@@ -67,7 +67,6 @@ describe('UserService', () => {
 
   it('should find user by email', async () => {
     const foundUser = await service.findOneByEmailOrPseudo(createdUser.email);
-    console.log(foundUser);
     expect(foundUser).toBeDefined();
     expect(foundUser.email).toEqual(createdUser.email);
     expect(foundUser.firstName).toEqual(createdUser.firstName);
