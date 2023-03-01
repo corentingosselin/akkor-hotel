@@ -27,11 +27,5 @@ jobs:
           node-version: '17'
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm exec nx-cloud start-ci-run
       - run: pnpm exec nx affected --target=build --parallel --max-parallel=3
       - run: pnpm exec nx affected --target=lint --parallel --max-parallel=2
-      - run: pnpm exec nx affected --target=test --parallel --max-parallel=2
-
-      - name: Clean Agents
-        if: ${{ always() }}
-        run: pnpm exec nx-cloud stop-all-agents
