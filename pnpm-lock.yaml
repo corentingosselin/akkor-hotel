@@ -38,6 +38,7 @@ specifiers:
   '@nrwl/webpack': 15.6.3
   '@nrwl/workspace': 15.6.3
   '@taiga-ui/addon-mobile': ^3.19.0
+  '@taiga-ui/addon-table': ^3.19.0
   '@taiga-ui/cdk': ^3.19.0
   '@taiga-ui/core': ^3.19.0
   '@taiga-ui/icons': ^3.19.0
@@ -105,6 +106,7 @@ dependencies:
   '@ngneat/until-destroy': 9.2.3_w2a4ar2ssyezibn6c65i4snjzu
   '@nrwl/angular': 15.7.1_hfz2m537s3uxplmjiopiu67ide
   '@taiga-ui/addon-mobile': 3.19.0_hwsrelrcbea724ln5lopwratei
+  '@taiga-ui/addon-table': 3.19.0_nehfkddigp2lkvngwgtbpiheda
   '@taiga-ui/cdk': 3.19.0_nonsgekq3wybw3gbyt2d7lvbkq
   '@taiga-ui/core': 3.19.0_u5mpdws5ftuenhh7j53u6kitvy
   '@taiga-ui/icons': 3.19.0
@@ -3827,6 +3829,29 @@ packages:
       rxjs: '>=6.0.0'
     dependencies:
       '@angular/cdk': 15.2.0_oznblskr5qbtvt766x35xnlopy
+      '@angular/common': 15.1.5_w2a4ar2ssyezibn6c65i4snjzu
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      '@taiga-ui/cdk': 3.19.0_nonsgekq3wybw3gbyt2d7lvbkq
+      '@taiga-ui/core': 3.19.0_u5mpdws5ftuenhh7j53u6kitvy
+      '@taiga-ui/kit': 3.19.0_phek4nmujbn2s2f54ajpu5z5mq
+      '@tinkoff/ng-polymorpheus': 4.0.10_@angular+core@15.1.5
+      rxjs: 7.5.7
+      tslib: 2.5.0
+    dev: false
+
+  /@taiga-ui/addon-table/3.19.0_nehfkddigp2lkvngwgtbpiheda:
+    resolution: {integrity: sha512-2NXewbwLwGY284KTYq6Q9M+jHBcflTQrAhy9L/vHux3iodRzE86s5VkHB9Hg0r/54TKlecaeT5qiD/Ss1/AVaw==}
+    peerDependencies:
+      '@angular/common': '>=12.0.0'
+      '@angular/core': '>=12.0.0'
+      '@ng-web-apis/intersection-observer': '>=3.0.0'
+      '@taiga-ui/cdk': '>=3.19.0'
+      '@taiga-ui/core': '>=3.19.0'
+      '@taiga-ui/i18n': '>=3.19.0'
+      '@taiga-ui/kit': '>=3.19.0'
+      '@tinkoff/ng-polymorpheus': '>=4.0.0'
+      rxjs: '>=6.0.0'
+    dependencies:
       '@angular/common': 15.1.5_w2a4ar2ssyezibn6c65i4snjzu
       '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
       '@taiga-ui/cdk': 3.19.0_nonsgekq3wybw3gbyt2d7lvbkq

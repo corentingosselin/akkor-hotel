@@ -4,14 +4,6 @@ import { RouterModule } from '@angular/router';
 import { frontendFeatureAuthCoreRoutes } from './lib.routes';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(frontendFeatureAuthCoreRoutes),
-    
-  ],
+  imports: [CommonModule, RouterModule.forChild(frontendFeatureAuthCoreRoutes)],
 })
-export class FrontendFeatureAuthCoreModule {
-
-
-
-}
+export class FrontendFeatureAuthCoreModule {}

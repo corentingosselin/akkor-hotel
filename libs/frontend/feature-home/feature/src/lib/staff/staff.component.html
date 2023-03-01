@@ -3,7 +3,7 @@
     <h1>Your hotels</h1>
     <button
       tuiButton
-      type="button" 
+      type="button"
       icon="tuiIconPlusCircleLarge"
       size="m"
       (click)="onDialogOpen()"
@@ -12,11 +12,5 @@
       new hotel
     </button>
   </div>
-  <div class="hotels">
-    <akkor-hotel-hotel-card></akkor-hotel-hotel-card>
-    <akkor-hotel-hotel-card></akkor-hotel-hotel-card>
-    <akkor-hotel-hotel-card></akkor-hotel-hotel-card>
-    <akkor-hotel-hotel-card></akkor-hotel-hotel-card>
-    <akkor-hotel-hotel-card></akkor-hotel-hotel-card>
-  </div>
+  <akkor-hotel-list-hotels [hotels$]="_hotels$"></akkor-hotel-list-hotels>
 </div>

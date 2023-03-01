@@ -1,27 +1,19 @@
-.hotels {
-    margin: 3rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
 .admin-home {
-    margin: 3rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  margin: 3rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 h1 {
-    margin: 0;
-    font-size: 2rem;
+  margin: 0;
+  font-size: 2rem;
 }
 
-
 .hotel-header {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 
-    align-items: center;
-    gap: 1rem;
+  align-items: center;
+  gap: 1rem;
 }

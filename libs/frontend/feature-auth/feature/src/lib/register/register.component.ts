@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { AuthFacade } from '@akkor-hotel/frontend/feature-auth/data-access';
-import { RegisterUserDto } from '@akkor-hotel/shared/api-interfaces';
 import { LoadingErrorService } from '@akkor-hotel/shared/frontend';
 import { isPasswordSecure } from '@akkor-hotel/shared/utils';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
@@ -10,7 +9,7 @@ import {
   FormGroup,
   ValidationErrors,
   ValidatorFn,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 

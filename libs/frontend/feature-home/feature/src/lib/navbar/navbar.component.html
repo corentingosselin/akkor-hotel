@@ -23,7 +23,9 @@
       <tui-opt-group>
         <div class="my-account flex-row">
           <tui-svg src="tuiIconUser"></tui-svg>
-          <a tuiOption> My Account</a>
+          <button tuiOption (click)="openAccountDialog()">
+            My Account
+          </button>
         </div>
       </tui-opt-group>
       <tui-opt-group>

@@ -1,5 +1,5 @@
-<ng-container *ngIf="loggedUser | async as session">
-  <div class="hotel-card">
+<ng-container *ngIf="loggedUser$ | async as session">
+  <div class="hotel-card" (click)="openDialogBooking()">
     <h2>{{ hotel.name }}</h2>
     <p>{{ hotel.description }}</p>
     <img [src]="hotel.picture" alt="hotel image" />

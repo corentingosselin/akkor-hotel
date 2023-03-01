@@ -1,0 +1,27 @@
+<div class="container flex-column">
+    <h1>Bookings for hotel: {{hotel.name}} </h1>
+  <tui-loader size="xxl" [overlay]="true" [showLoader]="(loading$ | async)!">
+    <table tuiTable class="table" [columns]="columns">
+      <thead>
+        <tr tuiThGroup>
+          <th tuiTh>Email</th>
+          <th tuiTh>First name</th>
+          <th tuiTh>Last name</th>
+          <th tuiTh>Arrival</th>
+          <th tuiTh>Departure</th>
+        </tr>
+      </thead>
+
+      <tbody tuiTbody [data]="(data$ | async)!">
+        <tr tuiTr *ngFor="let br of data">
+          <td *tuiCell="'arrival'" tuiTd>
+            {{ br.startDate | date : 'dd/MM/yyyy' }}
+          </td>
+          <td *tuiCell="'departure'" tuiTd>
+            {{ br.endDate | date : 'dd/MM/yyyy' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </tui-loader>
+</div>

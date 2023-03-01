@@ -73,4 +73,11 @@ export class BookingController {
   async getAll(@Param('username') username: string) {
     return await this.bookingService.findBookingByEmailOrPseudo(username);
   }
+
+  @UseGuards(RoleGuard)
+  @Roles(UserRole.ADMIN)
+  @Get('hotel/:id')
+  async getAllBookings(@Param('id') id: number) {
+    return await this.bookingService.getAllBookingsByHotel(id);
+  }
 }

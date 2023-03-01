@@ -17,7 +17,7 @@ import { BackendFeatureUserDataAccessModule } from '@akkor-hotel/backend/feature
       useFactory: async (configService: ConfigService) => {
         return {
           secret: configService.get<string>('JWT_SECRET'),
-          signOptions: { expiresIn: '10m' },
+          signOptions: { expiresIn: '30m' },
         };
       },
       inject: [ConfigService],

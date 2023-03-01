@@ -1,5 +1,6 @@
 import { HotelService } from '@akkor-hotel/backend/feature-hotel/data-access';
 import {
+  BookingResponse,
   CreateBookingDto,
   CreatedBookingResponse,
   UpdateBookingDto,
@@ -8,7 +9,6 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -52,6 +52,16 @@ export class BookingService {
     return bookings;
   }
 
+  async getAllBookingsByHotel(hotelId: number): Promise<BookingResponse[]> {
+    const bookings = await this.bookingRepository
+      .createQueryBuilder('booking')
+      .leftJoinAndSelect('booking.user', 'user')
+      .leftJoinAndSelect('booking.hotel', 'hotel')
+      .where('booking.hotelId = :hotelId', { hotelId })
+      .getMany();
+    return bookings;
+  }
+
   private async create(
     booking: CreateBookingDto
   ): Promise<CreatedBookingResponse> {
@@ -60,8 +70,17 @@ export class BookingService {
       hotel: { id: booking.hotelId },
       user: { id: booking.userId },
     };
-    const result = await this.bookingRepository.save(newBooking);
     const hotel = await this.hotelService.getById(booking.hotelId);
+    if (!hotel) {
+      throw new BadRequestException(
+        'The hotel your are trying to book does not exist'
+      );
+    }
+
+    const result = await this.bookingRepository.save(newBooking);
+    if (!result) {
+      throw new BadRequestException('The booking could not be registered');
+    }
 
     return {
       id: result.id,
@@ -80,7 +99,7 @@ export class BookingService {
   async createByUser(userId: number, booking: CreateBookingDto) {
     //verify if the user owns the booking
     if (booking.userId != userId) {
-      return new UnauthorizedException();
+      throw new BadRequestException();
     }
 
     //check if the booking does not already exist for same user
@@ -100,7 +119,7 @@ export class BookingService {
       return b.hotel.id === booking.hotelId && d1.getTime() === d2.getTime();
     });
     if (bookingAlreadyExist) {
-      return new UnauthorizedException(
+      throw new BadRequestException(
         'You already have a booking for this hotel'
       );
     }

@@ -27,17 +27,17 @@ export class AuthFacade {
     private readonly authService: AuthService,
     private readonly loadingErrorService: LoadingErrorService,
     private route: Router,
-
   ) {}
 
   private loggedIn$ = new BehaviorSubject<SessionResponse | null>(null);
+  public logout$ = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn$(): Observable<SessionResponse | null> {
     return this.loggedIn$.asObservable();
   }
 
   login(loginDto: LoginUserDto) {
-    this.loadingErrorService.showLoading();
+    this.loadingErrorService.startLoading();
     this.authService
       .login(loginDto.username, loginDto.password)
       .pipe(
@@ -46,18 +46,16 @@ export class AuthFacade {
         tap((session) => {
           this.loggedIn$.next(session);
           localStorage.setItem('userSession',  JSON.stringify(session));
-          this.loadingErrorService.hideLoading();
           this.route.navigate(['/home']);
+          this.logout$.next(false);
         }),
         catchError((error: HttpErrorResponse) => {
           this.loggedIn$.next(null);
           if (error.status === 401) {
-            this.loadingErrorService.hideLoading();
             return throwError(() =>
               this.loadingErrorService.showError('Invalid email or password.')
             );
           } else {
-            this.loadingErrorService.hideLoading();
             return throwError(() =>
               this.loadingErrorService.showError(
                 'An error occurred. Please try again later.'
@@ -71,7 +69,9 @@ export class AuthFacade {
 
   clearUserSession() {
     localStorage.removeItem('userSession');
+    this.loadingErrorService.stopLoading();
     this.loggedIn$.next(null);
+    this.logout$.next(true);
   }
 
   isAuthenticated(): boolean {
@@ -100,7 +100,7 @@ export class AuthFacade {
   }
 
   register(registerDto: RegisterUserDto) {
-    this.loadingErrorService.showLoading();
+    this.loadingErrorService.startLoading
     this.authService
       .register(registerDto)
       .pipe(
@@ -109,20 +109,18 @@ export class AuthFacade {
         tap((session) => {
           this.loggedIn$.next(session);
           localStorage.setItem('userSession', JSON.stringify(session));
-          this.loadingErrorService.hideLoading();
+          this.loadingErrorService.stopLoading
           this.route.navigate(['/home']);
         }),
         catchError((error: HttpErrorResponse) => {
           this.loggedIn$.next(null);
           if (error.status === 400) {
-            this.loadingErrorService.hideLoading();
             return throwError(() =>
               this.loadingErrorService.showError(
                 error.error.message || 'An error occurred. Please try again later.'
               )
             );
           } else {
-            this.loadingErrorService.hideLoading();
             return throwError(() =>
               this.loadingErrorService.showError(
                 'An error occurred. Please try again later.'

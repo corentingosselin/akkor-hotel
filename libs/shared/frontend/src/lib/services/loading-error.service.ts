@@ -16,19 +16,30 @@ export class LoadingErrorService {
     return this.error$.asObservable();
   }
 
-  showLoading(): void {
+  startLoading(): void {
+    this.showLoading();
+    this.clearError();
+  }
+
+  stopLoading(): void {
+    this.hideLoading();
+    this.clearError();
+  }
+
+  private showLoading(): void {
     this.loading$.next(true);
   }
 
-  hideLoading(): void {
+  private hideLoading(): void {
     this.loading$.next(false);
   }
 
   showError(message: string): void {
+    this.hideLoading();
     this.error$.next(message);
   }
 
-  clearError(): void {
+  private clearError(): void {
     this.error$.next('');
   }
 }

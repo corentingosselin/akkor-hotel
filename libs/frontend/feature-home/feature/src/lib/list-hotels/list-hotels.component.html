@@ -1,0 +1,21 @@
+
+  <tui-loader size="xxl" [overlay]="true" [showLoader]="(loading$ | async)!">
+    <ng-container *ngIf="hotels$ | async as hotels">
+      <ng-template [ngIf]="hotels.length > 0" [ngIfElse]="noHotels">
+        <div class="hotels">
+          <ng-container *ngFor="let hotel of hotels">
+            <akkor-hotel-hotel-card [hotel]="hotel"></akkor-hotel-hotel-card>
+          </ng-container>
+        </div>
+      </ng-template>
+
+      <!-- No Hotels -->
+      <ng-template #noHotels>
+        <div class="no-hotels" *ngIf="!(loading$ | async)!">
+          <tui-svg src="tuiIconKeyLarge"></tui-svg>
+          <h3>You don't have any hotels yet</h3>
+        </div>
+      </ng-template>
+    </ng-container>
+  </tui-loader>
+

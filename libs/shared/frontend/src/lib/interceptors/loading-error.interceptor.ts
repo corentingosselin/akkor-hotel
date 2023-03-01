@@ -19,19 +19,18 @@ export class HttpLoadingErrorInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.loadingErrorService.showLoading();
+    this.loadingErrorService.startLoading();
     return next.handle(request).pipe(
       delay(3000),
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          this.loadingErrorService.hideLoading();
+          this.loadingErrorService.stopLoading();
         }
       }),
       catchError((error: HttpErrorResponse) =>
         interval(5000).pipe(
           // only affects "error"
           mergeMap(() => {
-            this.loadingErrorService.hideLoading();
             if (error.error instanceof ErrorEvent) {
               this.loadingErrorService.showError('An error occurred.');
             } else {
@@ -44,7 +43,7 @@ export class HttpLoadingErrorInterceptor implements HttpInterceptor {
         )
       ),
       finalize(() => {
-        this.loadingErrorService.hideLoading();
+        this.loadingErrorService.stopLoading();
       })
     );
   }

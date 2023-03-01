@@ -1,2 +1,12 @@
 <akkor-hotel-navbar></akkor-hotel-navbar>
-<akkor-hotel-staff></akkor-hotel-staff>
+
+<ng-container *ngIf="(loggedUser | async)?.user as user">
+  <akkor-hotel-staff
+    *ngIf="user.role === UserRole.ADMIN"
+    [hotels$]="hotels$"
+  ></akkor-hotel-staff>
+  <akkor-hotel-user
+    *ngIf="user.role === UserRole.USER"
+    [hotels$]="hotels$"
+  ></akkor-hotel-user>
+</ng-container>

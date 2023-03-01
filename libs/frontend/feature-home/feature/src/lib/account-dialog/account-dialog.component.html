@@ -1,0 +1,17 @@
+<div class="my-account">
+  <h1>My account</h1>
+
+  <ng-container *ngIf="(loggedIn$ | async)?.user as user">
+    <div class="flex-row-gap">
+      <div class="flex-column">
+        <label tuiLabel="email">{{ user.email }}</label>
+        <label tuiLabel="pseudo">{{ user.pseudo }}</label>
+        <label tuiLabel="role">{{ user.role }}</label>
+      </div>
+      <div class="flex-column">
+        <label tuiLabel="last name">{{ user.lastName }}</label>
+        <label tuiLabel="first name">{{ user.firstName }}</label>
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -1,5 +1,13 @@
 import { AuthFacade } from '@akkor-hotel/frontend/feature-auth/data-access';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  Injector
+} from '@angular/core';
+import { TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { AccountDialogComponent } from '../account-dialog/account-dialog.component';
 
 @Component({
   selector: 'akkor-hotel-navbar',
@@ -8,12 +16,20 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
-  
-  constructor(private readonly authFacade: AuthFacade) {}
+  constructor(
+    @Inject(Injector) private readonly injector: Injector,
+    @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
+    private readonly authFacade: AuthFacade,
+  ) {}
 
 
-  logout(): void {  
-    this.authFacade.logout();
+  openAccountDialog(): void {
+    this.dialogService
+      .open(new PolymorpheusComponent(AccountDialogComponent, this.injector))
+      .subscribe();
   }
 
+  logout(): void {
+    this.authFacade.logout();
+  }
 }

@@ -30,6 +30,7 @@ export class JwtInterceptor implements HttpInterceptor {
         if (error.status === 401) {
           // Redirect the user to the login page
           this.authFacade.logout();
+          
         }
         return throwError(error);
       })

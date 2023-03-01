@@ -8,18 +8,30 @@ import {
   TuiDialogModule,
   TuiErrorModule,
   TuiHostedDropdownModule,
+  TuiLabelModule,
   TuiLoaderModule,
   TuiNotificationModule,
-  TuiSvgModule
+  TuiSvgModule,
 } from '@taiga-ui/core';
-import { TuiAvatarModule, TuiFieldErrorPipeModule, TuiInputDateRangeModule, TuiInputModule } from '@taiga-ui/kit';
+import {
+  TuiAvatarModule,
+  TuiFieldErrorPipeModule,
+  TuiInputDateRangeModule,
+  TuiInputModule,
+  TuiPushModule,
+} from '@taiga-ui/kit';
 import { HomeComponent } from './home/home.component';
 import { HotelCardComponent } from './hotel-card/hotel-card.component';
 import { featureRoutes } from './lib.routes';
+import { ListHotelsComponent } from './list-hotels/list-hotels.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HotelCreationDialogComponent } from './staff/hotel-creation-dialog/hotel-creation-dialog.component';
 import { StaffComponent } from './staff/staff.component';
 import { UserComponent } from './user/user.component';
+import { AccountDialogComponent } from './account-dialog/account-dialog.component';
+import { ListBookingsComponent } from './staff/list-bookings/list-bookings.component';
+import {TuiTableModule} from '@taiga-ui/addon-table';
+
 
 const TUI_MODULES = [
   TuiButtonModule,
@@ -33,7 +45,10 @@ const TUI_MODULES = [
   TuiHostedDropdownModule,
   TuiSvgModule,
   TuiErrorModule,
-  TuiFieldErrorPipeModule
+  TuiFieldErrorPipeModule,
+  TuiLabelModule,
+  TuiPushModule,
+  TuiTableModule
 ];
 
 @NgModule({
@@ -50,7 +65,9 @@ const TUI_MODULES = [
     HotelCreationDialogComponent,
     HotelCardComponent,
     NavbarComponent,
+    ListHotelsComponent,
+    AccountDialogComponent,
+    ListBookingsComponent,
   ],
-  providers: [],
 })
 export class FrontendFeatureHomeFeatureModule {}
