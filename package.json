@@ -15,7 +15,9 @@
     "docker:build:test": "docker-compose -f test/docker-compose.yml build",
     "docker:build": "docker-compose -f docker/docker-compose.yml --env-file docker/.docker-compose.env build",
     "test": "nx affected:test --verbose --run-in-band --skip-nx-cache",
-    "start:front": "nx serve frontend --proxy-config=tools/proxy.conf.json"
+    "start:front": "nx serve frontend --proxy-config=tools/proxy.conf.json",
+    "affected:lint":"nx affected:lint --all",
+    "lint": "nx run-many --target=lint --all"
   },
   "private": true,
   "dependencies": {
