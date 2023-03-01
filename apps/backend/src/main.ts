@@ -13,13 +13,15 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
+
   const configService = app.get(ConfigService);
 
   const config = new DocumentBuilder()
     .setTitle('Akkor Hotel API')
     .setDescription('All API endpoints for Akkor Hotel Backend Application')
     .setVersion('1.0')
-    .addTag('cats')
+    .addTag('hotels')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

@@ -28,7 +28,7 @@ export class HttpLoadingErrorInterceptor implements HttpInterceptor {
         }
       }),
       catchError((error: HttpErrorResponse) =>
-        interval(5000).pipe(
+        interval(3000).pipe(
           // only affects "error"
           mergeMap(() => {
             if (error.error instanceof ErrorEvent) {

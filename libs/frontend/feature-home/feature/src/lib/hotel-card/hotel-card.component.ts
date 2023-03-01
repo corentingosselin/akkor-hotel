@@ -10,9 +10,13 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
-import { TuiAlertService, TuiDialogService, TuiNotification } from '@taiga-ui/core';
+import {
+  TuiAlertService,
+  TuiDialogService,
+  TuiNotification,
+} from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { catchError, take } from 'rxjs';
+import { catchError, filter, take } from 'rxjs';
 import { ListBookingsComponent } from '../staff/list-bookings/list-bookings.component';
 
 @Component({
@@ -50,18 +54,29 @@ export class HotelCardComponent {
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService
   ) {}
 
-  openDialogBooking() : void {
-    console.log('openDialogBooking');
-    this.dialogService
-      .open(
-        new PolymorpheusComponent(ListBookingsComponent, this.injector),
-        {
-          data: this.hotel,
-        }
+  openDialogBooking(): void {
+    if (!this.hotel) return;
+    this.loggedUser$
+      .pipe(
+        take(1),
+        filter(
+          (session) =>
+            !!session &&
+            (session.user.role === UserRole.ADMIN ||
+              session.user.role === UserRole.EMPLOYEE)
+        )
       )
-      .subscribe();
+      .subscribe(() => {
+        this.dialogService
+          .open(
+            new PolymorpheusComponent(ListBookingsComponent, this.injector),
+            {
+              data: this.hotel,
+            }
+          )
+          .subscribe();
+      });
   }
-        
 
   onBook(): void {
     if (!this.control.value) return;
