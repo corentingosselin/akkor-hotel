@@ -27,6 +27,7 @@ specifiers:
   '@nestjs/swagger': ^6.2.1
   '@nestjs/testing': ^9.0.0
   '@nestjs/typeorm': ^9.0.1
+  '@ng-web-apis/universal': ^2.1.0
   '@ngneat/until-destroy': ^9.2.3
   '@nrwl/angular': ^15.6.3
   '@nrwl/cypress': 15.6.3
@@ -143,6 +144,7 @@ devDependencies:
   '@angular/language-service': 15.1.5
   '@nestjs/schematics': 9.0.4_typescript@4.8.4
   '@nestjs/testing': 9.3.9_yqmogfxzeu633isbftgaoi4ho4
+  '@ng-web-apis/universal': 2.1.0_dld36wxul2gsg27iqrvh4tzd3i
   '@nrwl/cypress': 15.6.3_gemgxnsbzodaaivtirucicvzdy
   '@nrwl/eslint-plugin-nx': 15.6.3_7h4xi6u72tmtv4jcsflc7xqxha
   '@nrwl/jest': 15.7.1_7nbvt2swijzkpi5mktk3iifwgy
@@ -2859,6 +2861,20 @@ packages:
       '@ng-web-apis/common': 2.1.0_oznblskr5qbtvt766x35xnlopy
       tslib: 2.5.0
     dev: false
+
+  /@ng-web-apis/universal/2.1.0_dld36wxul2gsg27iqrvh4tzd3i:
+    resolution: {integrity: sha512-/m6XAr2Pqpv7EOr5p/NsCUrRbLXpYH9/uIc+5HEi3kn8zYcGiM43ThX0Ln0Z8hKfsODNRmp21i764DOznSdGqw==}
+    peerDependencies:
+      '@angular/core': '>=12.0.0'
+      '@ng-web-apis/common': '>=2.0.0'
+      '@types/node': '>=10.0.0'
+      rxjs: '>=6.0.0'
+    dependencies:
+      '@angular/core': 15.1.5_rxjs@7.5.7+zone.js@0.11.8
+      '@types/node': 18.7.1
+      rxjs: 7.5.7
+      tslib: 2.5.0
+    dev: true
 
   /@ngneat/until-destroy/9.2.3_w2a4ar2ssyezibn6c65i4snjzu:
     resolution: {integrity: sha512-ryX0vqDOdmYo53f7v5Ivbj1jcqOEX+vM1iiV9NYepWDha4VJp9lWrDFK9tRt2evAMzF/9u67JLzs4Xjcoh+Taw==}

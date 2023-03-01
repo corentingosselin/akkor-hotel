@@ -56,7 +56,8 @@ export class RegisterComponent {
     pseudoControl: new FormControl('', [Validators.required]),
   });
   register() {
-    if (this.form.invalid) return;
+    console.log(!this.form.valid);
+    if (!this.form.valid) return;
     this.authFacade.register({
       email: this.form.controls.emailControl.value!,
       password: this.form.controls.passwordControl.value!,

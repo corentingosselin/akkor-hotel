@@ -11,6 +11,8 @@ services:
     volumes:
       - frontend-volume:/usr/src/app
     restart: always
+    environment:
+      REMOTE_API_URL: http://backend:${BACKEND_PORT}
     ports:
       - ${FRONTEND_PORT}:80
   backend:
