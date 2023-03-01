@@ -26,6 +26,27 @@ jobs:
         with:
           node-version: '17'
           cache: 'pnpm'
+
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          host port: 3306
+          container port: 3306 
+          character set server: 'utf8' 
+          mysql database: 'akkor_hotel' 
+          mysql root password: 'root'
+
+
       - run: pnpm install
       - run: pnpm exec nx affected --target=build --parallel --max-parallel=3
       - run: pnpm exec nx affected --target=lint --parallel --max-parallel=2
+
+      - name: Set up Docker Compose
+      uses: docker/compose@v2.2.3
+      with:
+        compose-version: 1.29.2
+
+      - name: Build and run containers
+      run: |
+        docker-compose -f test/docker-compose.yml up -d
+
+      - run: pnpm exec nx affected --target=test --run-in-band

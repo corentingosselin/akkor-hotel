@@ -10,14 +10,6 @@ services:
       MYSQL_ROOT_USER: root
     ports:
       - 3306:3306
-  test-frontend:
-    build:
-      context: ../
-      dockerfile: apps/frontend/Dockerfile
-    container_name: test-frontend
-    restart: always
-    ports:
-      - 8080:80
   test-backend:
     env_file: 
       - .back.test.env
