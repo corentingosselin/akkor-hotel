@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  test-database:
+    image: mysql:latest
+    container_name: test-database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: akkor_hotel
+      MYSQL_ROOT_USER: root
+    ports:
+      - 3306:3306
+  test-backend:
+    env_file: 
+      - .back.test.env
+    build:
+      context: ../
+      dockerfile: apps/backend/Dockerfile
+    container_name: test-backend
+    restart: always
+    ports:
+      - 4000:4000
+    depends_on:
+      - test-database
