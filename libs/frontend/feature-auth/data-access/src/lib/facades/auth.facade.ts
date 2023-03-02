@@ -36,6 +36,10 @@ export class AuthFacade {
     return this.loggedIn$.asObservable();
   }
 
+  set loggedIn(session: SessionResponse | null) {
+    this.loggedIn$.next(session);
+  }
+
   login(loginDto: LoginUserDto) {
     this.loadingErrorService.startLoading();
     this.authService

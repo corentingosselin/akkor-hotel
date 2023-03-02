@@ -32,3 +32,5 @@ export interface BookingResponse {
     created_at: Date;
     updated_at: Date;
 }
+
+

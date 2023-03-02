@@ -2,7 +2,7 @@
 export default {
   displayName: 'frontend-feature-home-feature',
   preset: '../../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts','<rootDir>/src/setup-jest.js' ],
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',

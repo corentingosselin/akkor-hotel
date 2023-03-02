@@ -1,6 +1,6 @@
 import { AuthFacade } from '@akkor-hotel/frontend/feature-auth/data-access';
 import { HotelFacade } from '@akkor-hotel/frontend/feature-home/data-access';
-import { Hotel, UserRole } from '@akkor-hotel/shared/api-interfaces';
+import { Hotel, SessionResponse, UserRole } from '@akkor-hotel/shared/api-interfaces';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -46,6 +46,7 @@ export class HotelCardComponent {
   control = new FormControl();
 
   readonly loggedUser$ = this.authFacade.isLoggedIn$;
+
   constructor(
     private readonly hotelFacade: HotelFacade,
     private readonly authFacade: AuthFacade,
