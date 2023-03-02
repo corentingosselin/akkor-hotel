@@ -1,11 +1,10 @@
+import { CreatedHotelResponse } from '@akkor-hotel/shared/api-interfaces';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StaffComponent } from './staff.component';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { BehaviorSubject, of } from 'rxjs';
-import { CreatedHotelResponse } from '@akkor-hotel/shared/api-interfaces';
-import { HotelCreationDialogComponent } from './hotel-creation-dialog/hotel-creation-dialog.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { of } from 'rxjs';
+import { StaffComponent } from './staff.component';
 
 describe('StaffComponent', () => {
   let component: StaffComponent;

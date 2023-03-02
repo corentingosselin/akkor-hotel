@@ -6,24 +6,30 @@
 
 ## Development server
 
-Run `nx serve backend` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Run `nx serve backend` for a dev server. Navigate to http://localhost:4000/. The app will automatically reload if you change any of the source files.
+
+Run `nx serve frontend` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
 ## Understand this workspace
 
 Run `nx graph` to see a diagram of the dependencies of the projects.
 
-## Running tests
-
-1. Start the test containers first with: `pnpm run docker:test`   
-2. Then run tests: `nx affected:test`
 
 ## Running akkor hotel application
 
-Execute this command: `npm run start`
+Install docker, you can use docker desktop: https://www.docker.com/products/docker-desktop/   
+Install pnpm: `npm i pnpm`  
+Execute this command: `pnpm run start`
 
-## Resolve cached circular dependencies
+Now you can connect to the frontend: http://localhost:8080
 
-`nx reset `
-This command will force lint all the project to remove errors/warnings complaining about circular dependencies for example   
-`nx run-many --target=lint --all --parallel --force` 
+You can access to the api documentation here: http://localhost:4000/api
 
+
+## Running tests
+
+If you started the app with pnpm run start, you must stop the containers before running test. You can use: `pnpm run docker:stop`
+
+
+1. Start the test containers first with: `pnpm run docker:test`   
+2. Then run tests: `nx affected:test`
