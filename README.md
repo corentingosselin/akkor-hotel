@@ -33,3 +33,4 @@ If you started the app with pnpm run start, you must stop the containers before 
 
 1. Start the test containers first with: `pnpm run docker:test`   
 2. Then run tests: `nx affected:test`
+3. You can also run test without cache: `pnpm run test` 
