@@ -25,6 +25,9 @@ Now you can connect to the frontend: http://localhost:8080
 
 You can access to the api documentation here: http://localhost:4000/api
 
+You can register and get an admin user by updating the role of a normal user
+You need to connect to the database, and change the role manually from user to admin in the column section.  This process is for security reasons.
+
 
 ## Running tests
 
