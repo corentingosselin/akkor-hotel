@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "nx run-many --targets=build --all",
-    "start": "pnpm run i && pnpm run build && docker-compose -f docker/docker-compose.yml --env-file docker/.docker-compose.env --profile database --profile frontend --profile backend up -d --force-recreate",
+    "start": "pnpm i && pnpm run build && docker-compose -f docker/docker-compose.yml --env-file docker/.docker-compose.env --profile database --profile frontend --profile backend up -d --force-recreate",
     "docker:database": "docker-compose -f docker/docker-compose.yml --env-file docker/.docker-compose.env -p database up -d --force-recreate",
     "docker:down": "docker-compose -f docker/docker-compose.yml --env-file docker/.docker-compose.env down",
     "docker:stop": "docker-compose -f docker/docker-compose.yml --env-file docker/.docker-compose.env stop",
